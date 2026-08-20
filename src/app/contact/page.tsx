@@ -704,6 +704,7 @@ export default function ContactPage() {
                 </div>
               </motion.a>
             </motion.div>
+            </div>
           </div>
         </section>
       </main>
