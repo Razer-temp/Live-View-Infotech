@@ -222,7 +222,7 @@ export default function Navbar() {
         
         {/* Logo */}
         <div className="flex items-center justify-start shrink-0">
-          <Link href="/" className="flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md">
+          <a href="/" className="flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md">
             <Image
               src="/Logo.png"
               alt="Live View Infotech"
@@ -231,7 +231,7 @@ export default function Navbar() {
               priority
               className="h-[52px] sm:h-[58px] lg:h-[72px] w-auto object-contain"
             />
-          </Link>
+          </a>
         </div>
 
         {/* Desktop Navigation — hidden below lg */}
@@ -310,7 +310,7 @@ export default function Navbar() {
                   {/* Bottom Link */}
                   <div className="bg-[#f8f9fa] p-4 border-t border-gray-100">
                     <Link 
-                      href="#" 
+                      href="/#services" 
                       onClick={closeMenu}
                       role="menuitem"
                       className="group flex items-center justify-center gap-2 text-[14px] font-semibold text-blue-600 hover:text-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md p-1"
@@ -326,14 +326,14 @@ export default function Navbar() {
           </div>
 
           <Link 
-            href="#" 
+            href="/#industries" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 whitespace-nowrap"
           >
             Industries We Serve
             <span className="absolute bottom-1 left-3 right-3 h-[2px] bg-blue-600 origin-center scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
           </Link>
           <Link 
-            href="#" 
+            href="/about" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 whitespace-nowrap"
           >
             About Us
@@ -492,7 +492,7 @@ export default function Navbar() {
                           
                           {/* View All Services */}
                           <Link
-                            href="#"
+                            href="/#services"
                             onClick={closeMobileMenu}
                             className="flex items-center gap-2 px-3 py-2.5 mt-1 text-[13px] font-semibold text-blue-600 rounded-lg hover:bg-blue-50/60 transition-colors"
                           >
@@ -508,7 +508,7 @@ export default function Navbar() {
                 {/* Industries We Serve */}
                 <motion.div custom={2} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
                   <Link
-                    href="#"
+                    href="/#industries"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
@@ -519,7 +519,7 @@ export default function Navbar() {
                 {/* About Us */}
                 <motion.div custom={3} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
                   <Link
-                    href="#"
+                    href="/about"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >

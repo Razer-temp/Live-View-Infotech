@@ -46,8 +46,9 @@ export default function ValueProposition() {
 
   return (
     <section 
+      id="services"
       ref={containerRef}
-      className="w-full bg-white text-[#111827] py-28 sm:py-36 md:py-48 px-6 sm:px-10 lg:px-16 border-b border-gray-100 flex justify-center relative overflow-hidden"
+      className="scroll-mt-20 lg:scroll-mt-24 w-full bg-white text-[#111827] py-28 sm:py-36 md:py-48 px-6 sm:px-10 lg:px-16 border-b border-gray-100 flex justify-center relative overflow-hidden"
     >
       <div className="max-w-6xl w-full mx-auto">
         

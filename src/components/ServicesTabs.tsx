@@ -111,7 +111,7 @@ export default function ServicesTabs() {
   const [activeTab, setActiveTab] = useState(solutions[0]);
 
   return (
-    <section id="industries" className="w-full flex flex-col md:flex-row min-h-[auto] md:min-h-[650px] overflow-hidden">
+    <section id="industries" className="w-full flex flex-col md:flex-row min-h-[auto] md:min-h-[650px] overflow-hidden scroll-mt-20 lg:scroll-mt-24">
       {/* Left side: Image and Interactive Icons */}
       <div className="relative w-full md:w-1/2 flex items-center justify-center bg-[#09152e] overflow-hidden touch-manipulation select-none min-h-[280px] sm:min-h-[350px] md:min-h-0">
         {/* Inner wrapper that maintains the exact aspect ratio of the image AND scales to cover the parent */}
