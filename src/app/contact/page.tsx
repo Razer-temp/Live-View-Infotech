@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import {
   Send,
@@ -252,31 +253,17 @@ export default function ContactPage() {
           ref={heroRef}
           className="relative w-full bg-[#09152e] overflow-hidden"
         >
-          {/* Animated gradient background */}
+          {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#095DA8]/30 via-[#09152e] to-[#09152e]" />
-            {/* Decorative floating shapes */}
-            <motion.div
-              className="absolute top-20 right-[15%] w-72 h-72 rounded-full bg-[#095DA8]/10 blur-3xl"
-              animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+            <Image
+              src="/Contact-img.png"
+              alt="Contact Live View Infotech"
+              fill
+              className="object-cover opacity-60"
+              priority
             />
-            <motion.div
-              className="absolute bottom-10 left-[10%] w-96 h-96 rounded-full bg-[#095DA8]/5 blur-3xl"
-              animate={{ x: [0, -20, 0], y: [0, 15, 0] }}
-              transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            {/* Grid pattern overlay */}
-            <div className="absolute inset-0 opacity-[0.03]">
-              <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <pattern id="contact-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#contact-grid)" />
-              </svg>
-            </div>
+            {/* Gradient Overlay for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#09152e]/95 via-[#09152e]/80 to-transparent" />
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 sm:py-28 lg:py-36">
@@ -315,16 +302,21 @@ export default function ContactPage() {
             </motion.div>
           </div>
 
-          {/* Diagonal cut */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-16 bg-white z-10"
-            style={{ clipPath: 'polygon(0 100%, 100% 0, 100% 100%)' }}
-          />
+          </div>
         </section>
 
         {/* ─── Form + Contact Info Section ──────────────────────────── */}
-        <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 sm:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+        <section
+          className="relative z-20 bg-white"
+          style={{
+            clipPath: 'polygon(0 0, 100% 5vw, 100% 100%, 0 100%)',
+            marginTop: '-5vw',
+            paddingTop: '12vw',
+            paddingBottom: '6rem'
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
             {/* ─── Form (3 columns) ─────────────────────────────────── */}
             <motion.div
               ref={formRef}
