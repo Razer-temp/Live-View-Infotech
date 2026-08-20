@@ -174,39 +174,38 @@ export default function Navbar() {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.2, ease: "easeOut" }
     },
     exit: { 
       opacity: 0,
-      transition: { duration: 0.25, ease: "easeIn" }
+      transition: { duration: 0.18, ease: "easeIn" }
     }
   };
 
+  // Fast cubic-bezier tween — avoids spring overshoot on mobile GPUs
   const mobileMenuVariants: Variants = {
     hidden: { x: '100%' },
     visible: { 
       x: 0,
       transition: { 
-        type: 'spring',
-        damping: 30,
-        stiffness: 300,
-        mass: 0.8
+        duration: 0.28,
+        ease: [0.25, 0.46, 0.45, 0.94] // ease-out-quart
       }
     },
     exit: { 
       x: '100%',
-      transition: { duration: 0.25, ease: [0.4, 0, 1, 1] }
+      transition: { duration: 0.22, ease: [0.4, 0, 0.6, 1] }
     }
   };
 
+  // Opacity-only stagger — GPU-composited, no layout recalc
   const mobileNavItemVariants: Variants = {
-    hidden: { opacity: 0, x: 20 },
+    hidden: { opacity: 0 },
     visible: (i: number) => ({
       opacity: 1,
-      x: 0,
-      transition: { delay: 0.1 + i * 0.06, duration: 0.35, ease: "easeOut" }
+      transition: { delay: 0.08 + i * 0.04, duration: 0.2, ease: "easeOut" }
     }),
-    exit: { opacity: 0, x: 10, transition: { duration: 0.15 } }
+    exit: { opacity: 0, transition: { duration: 0.1 } }
   };
 
   return (
@@ -405,6 +404,7 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             exit="exit"
+            style={{ willChange: 'transform' }}
             className="fixed top-0 right-0 z-[99] w-[min(85vw,380px)] h-full bg-white shadow-2xl lg:hidden flex flex-col overflow-hidden"
           >
             {/* Panel Header */}
@@ -451,13 +451,13 @@ export default function Navbar() {
                     </motion.div>
                   </button>
 
-                  {/* Services Sub-items */}
+                  {/* Services Sub-items — clipPath is GPU-composited, no reflow */}
                   <AnimatePresence>
                     {mobileServicesOpen && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1, transition: { height: { duration: 0.3, ease: 'easeOut' }, opacity: { duration: 0.2, delay: 0.1 } } }}
-                        exit={{ height: 0, opacity: 0, transition: { height: { duration: 0.25, ease: 'easeIn' }, opacity: { duration: 0.15 } } }}
+                        initial={{ clipPath: 'inset(0% 0% 100% 0%)', opacity: 0 }}
+                        animate={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1, transition: { clipPath: { duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] }, opacity: { duration: 0.18 } } }}
+                        exit={{ clipPath: 'inset(0% 0% 100% 0%)', opacity: 0, transition: { clipPath: { duration: 0.2, ease: [0.4, 0, 0.6, 1] }, opacity: { duration: 0.12 } } }}
                         className="overflow-hidden"
                       >
                         <div className="pl-3 pr-1 py-2 flex flex-col gap-0.5">
