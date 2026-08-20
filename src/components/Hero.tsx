@@ -1,0 +1,329 @@
+'use client';
+
+import { useRef, useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ArrowRight } from 'lucide-react';
+
+/* ─── Slide data ─────────────────────────────────────────────── */
+const heroSlides = [
+  {
+    src: '/hero-img/hero-img3.png',
+    alt: 'Commercial office entrance with CCTV dome camera and access-control reader',
+    eyebrow: 'Workplaces & Commercial Spaces',
+    subline: 'Know who\u2019s walking through your door.',
+  },
+  {
+    src: '/hero-img/hero-img1.png',
+    alt: 'Institutional building with CCTV camera mounted on canopy pillar',
+    eyebrow: 'Institutional Security',
+    subline: 'Protection built on public trust.',
+  },
+  {
+    src: '/hero-img/hero-img4.png',
+    alt: 'Industrial power-utility site with bullet camera on perimeter fence',
+    eyebrow: 'Industrial & Utility Sites',
+    subline: 'Perimeter security that never blinks.',
+  },
+  {
+    src: '/hero-img/hero-img2.png',
+    alt: 'Railway platform with CCTV camera on support beam',
+    eyebrow: 'Critical Infrastructure',
+    subline: 'Eyes on every platform, every hour.',
+  },
+];
+
+const SLIDE_DURATION = 6000; // ms each slide is displayed
+const CROSSFADE_DURATION = 1.2; // seconds for image cross-fade
+const TEXT_FADE_DURATION = 0.4; // seconds for text fade in/out
+
+export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const textRef = useRef<HTMLDivElement>(null);
+  const isTransitioning = useRef(false);
+  const currentIndexRef = useRef(0);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayedSlide, setDisplayedSlide] = useState(heroSlides[0]);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  /* ─── Detect reduced-motion preference ─────────────────────── */
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
+  /* ─── Initial entrance animation (runs once on mount) ──────── */
+  useEffect(() => {
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        // Animate static elements
+        gsap.to('.hero-static-element', {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.2,
+          ease: 'power3.out',
+        });
+
+        // Animate the first rotating text container
+        gsap.to('.hero-rotating-text', {
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          delay: 0.2,
+        });
+        
+        // Animate the text inside staggeringly
+        gsap.to(['.hero-rotating-eyebrow', '.hero-rotating-subline'], {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+          delay: 0.4,
+        });
+      }, containerRef);
+
+      setHasLoaded(true);
+
+      // Ken Burns on the first image
+      if (!prefersReducedMotion) {
+        const firstImage = imageRefs.current[0];
+        if (firstImage) {
+          gsap.fromTo(
+            firstImage.querySelector('img'),
+            { scale: 1 },
+            { scale: 1.08, duration: SLIDE_DURATION / 1000, ease: 'none' }
+          );
+        }
+      }
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /* ─── Transition to a specific slide ───────────────────────── */
+  const transitionToSlide = useCallback(
+    (nextIndex: number) => {
+      if (isTransitioning.current) return;
+      const currentIdx = currentIndexRef.current;
+      if (nextIndex === currentIdx) return;
+
+      isTransitioning.current = true;
+
+      const prevImageEl = imageRefs.current[currentIdx];
+      const nextImageEl = imageRefs.current[nextIndex];
+      const textEl = textRef.current;
+
+      if (!prevImageEl || !nextImageEl || !textEl) {
+        isTransitioning.current = false;
+        return;
+      }
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isTransitioning.current = false;
+        },
+      });
+
+      // 1. Fade out the rotating sub-headline text (staggered)
+      tl.to(['.hero-rotating-eyebrow', '.hero-rotating-subline'], {
+        opacity: 0,
+        y: -10,
+        duration: TEXT_FADE_DURATION,
+        stagger: 0.05,
+        ease: 'power2.in',
+      });
+
+      // 2. Update the displayed text + active dot (happens mid-timeline via callback)
+      tl.call(() => {
+        setDisplayedSlide(heroSlides[nextIndex]);
+        currentIndexRef.current = nextIndex;
+        setCurrentIndex(nextIndex);
+        
+        // Reset position for next entry to ensure it comes from the bottom again
+        gsap.set(['.hero-rotating-eyebrow', '.hero-rotating-subline'], { y: 15 });
+      });
+
+      // 3. Cross-fade images
+      tl.to(
+        prevImageEl,
+        {
+          opacity: 0,
+          duration: CROSSFADE_DURATION,
+          ease: 'power2.inOut',
+        },
+        `-=${TEXT_FADE_DURATION * 0.15}`
+      );
+      tl.to(
+        nextImageEl,
+        {
+          opacity: 1,
+          duration: CROSSFADE_DURATION,
+          ease: 'power2.inOut',
+        },
+        '<' // same start time as prev fade-out
+      );
+
+      // 4. Fade in the new sub-headline text (staggered)
+      tl.to(
+        ['.hero-rotating-eyebrow', '.hero-rotating-subline'],
+        {
+          opacity: 1,
+          y: 0,
+          duration: TEXT_FADE_DURATION + 0.2,
+          stagger: 0.1,
+          ease: 'power3.out',
+        },
+        `-=${CROSSFADE_DURATION * 0.3}`
+      );
+
+      // 5. Ken Burns zoom on the new image
+      if (!prefersReducedMotion) {
+        tl.fromTo(
+          nextImageEl.querySelector('img'),
+          { scale: 1 },
+          {
+            scale: 1.08,
+            duration: SLIDE_DURATION / 1000,
+            ease: 'none',
+          },
+          `-=${TEXT_FADE_DURATION + 0.1}`
+        );
+      }
+    },
+    [prefersReducedMotion]
+  );
+
+  /* ─── Autoplay loop ────────────────────────────────────────── */
+  useEffect(() => {
+    if (prefersReducedMotion || !hasLoaded) return;
+
+    const timer = setInterval(() => {
+      const next = (currentIndexRef.current + 1) % heroSlides.length;
+      transitionToSlide(next);
+    }, SLIDE_DURATION);
+
+    return () => clearInterval(timer);
+  }, [prefersReducedMotion, hasLoaded, transitionToSlide]);
+
+  return (
+    <section
+      ref={containerRef}
+      className="hero-section relative w-full h-[calc(100vh-84px)] min-h-[550px] flex items-center overflow-hidden bg-[#0e1015]"
+      aria-label="Hero banner"
+    >
+      {/* ── Background Images ──────────────────────────────── */}
+      <div className="absolute inset-0 z-0">
+        {heroSlides.map((slide, index) => (
+          <div
+            key={slide.src}
+            ref={(el) => {
+              imageRefs.current[index] = el;
+            }}
+            className="absolute inset-0 hero-slide-image"
+            style={{ opacity: index === 0 ? 1 : 0 }}
+          >
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+          </div>
+        ))}
+
+        {/* Gradient Overlays */}
+        {/* Left-heavy gradient for text readability */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background:
+              'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.1) 100%)',
+          }}
+        />
+        {/* Bottom vignette */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 45%)',
+          }}
+        />
+      </div>
+
+      {/* ── Foreground Content ─────────────────────────────── */}
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-10">
+        <div className="max-w-[650px] text-left">
+          {/* Rotating eyebrow + sub-line */}
+          <div
+            ref={textRef}
+            className="hero-rotating-text mb-8 p-5 md:p-6 rounded-2xl bg-black/20 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] inline-block relative overflow-hidden group"
+            style={{ opacity: 0 }}
+          >
+            {/* Subtle animated gradient glow */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50 pointer-events-none" />
+
+            <div className="relative z-10 flex items-center gap-3 mb-2 hero-rotating-eyebrow" style={{ opacity: 0, transform: 'translateY(15px)' }}>
+              <span className="block w-[4px] h-[18px] bg-primary rounded-full shrink-0 shadow-[0_0_12px_rgba(9,93,168,0.8)]" />
+              <span className="text-[13px] md:text-[14px] font-bold tracking-[0.12em] uppercase text-white drop-shadow-md">
+                {displayedSlide.eyebrow}
+              </span>
+            </div>
+            <p className="relative z-10 text-[18px] md:text-[22px] font-medium text-white leading-snug drop-shadow-lg hero-rotating-subline" style={{ opacity: 0, transform: 'translateY(15px)' }}>
+              {displayedSlide.subline}
+            </p>
+          </div>
+
+          {/* Static headline */}
+          <h1
+            className="hero-static-element text-[36px] sm:text-[44px] md:text-[52px] lg:text-[58px] font-bold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg"
+            style={{ opacity: 0, transform: 'translateY(30px)' }}
+          >
+            Securing Today,
+            <br />
+            Safeguarding Tomorrow
+          </h1>
+
+          {/* Static CTA button */}
+          <a
+            href="#"
+            className="hero-static-element inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 text-[15px] md:text-[16px] font-semibold rounded-full hover:bg-primary-hover hover:-translate-y-[1px] hover:shadow-lg transition-all duration-200"
+            style={{ opacity: 0, transform: 'translateY(30px)' }}
+          >
+            Get a Free Quote
+            <ArrowRight size={18} strokeWidth={2} className="ml-1" />
+          </a>
+        </div>
+      </div>
+
+      {/* ── Slide Indicator Dots ───────────────────────────── */}
+      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
+        {heroSlides.map((_, index) => (
+          <span
+            key={index}
+            className={`block rounded-full transition-all duration-500 ease-in-out ${
+              index === currentIndex
+                ? 'w-7 h-[5px] bg-white'
+                : 'w-[5px] h-[5px] bg-white/40'
+            }`}
+            aria-label={`Slide ${index + 1}${index === currentIndex ? ' (active)' : ''}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
