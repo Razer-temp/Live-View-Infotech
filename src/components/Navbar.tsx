@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, KeyboardEvent as ReactKeyboardEvent } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -125,7 +125,7 @@ export default function Navbar() {
     setActiveMenu(null);
   };
 
-  const dropdownVariants = {
+  const dropdownVariants: Variants = {
     hidden: { 
       opacity: 0, 
       y: prefersReducedMotion ? 0 : -8 
