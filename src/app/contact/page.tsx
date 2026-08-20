@@ -301,8 +301,6 @@ export default function ContactPage() {
               </motion.p>
             </motion.div>
           </div>
-
-          </div>
         </section>
 
         {/* ─── Form + Contact Info Section ──────────────────────────── */}
