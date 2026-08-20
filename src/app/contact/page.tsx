@@ -251,7 +251,7 @@ export default function ContactPage() {
         {/* ─── Hero Banner ─────────────────────────────────────────── */}
         <section
           ref={heroRef}
-          className="relative w-full bg-[#09152e] overflow-hidden"
+          className="relative w-full h-[45vh] min-h-[400px] flex flex-col justify-center bg-[#111] overflow-hidden"
         >
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
@@ -266,7 +266,7 @@ export default function ContactPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#09152e]/95 via-[#09152e]/80 to-transparent" />
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-20 sm:pt-28 lg:pt-36 pb-32 sm:pb-40 lg:pb-48">
+          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full pb-10">
             <motion.div
               initial="hidden"
               animate={heroInView ? 'visible' : 'hidden'}
@@ -307,10 +307,10 @@ export default function ContactPage() {
         <section
           className="relative z-20 bg-white"
           style={{
-            clipPath: 'polygon(0 0, 100% 12vw, 100% 100%, 0 100%)',
-            marginTop: '-12vw',
-            paddingTop: '16vw',
-            paddingBottom: '6rem'
+            clipPath: 'polygon(0 0, 100% 5vw, 100% 100%, 0 100%)',
+            marginTop: '-5vw',
+            paddingTop: '12vw',
+            paddingBottom: '8rem'
           }}
         >
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
