@@ -250,7 +250,13 @@ export default function Navbar() {
             onMouseEnter={() => handleMouseEnter('services')}
           >
             <button 
-              onClick={() => toggleMenu('services')}
+              onClick={(e) => {
+                e.preventDefault();
+                // Instead of toggling, we just ensure it's open.
+                // This prevents the "open then immediately close" bug on touch devices 
+                // where a tap triggers both mouseenter (open) and click (toggle to close).
+                setActiveMenu('services');
+              }}
               onKeyDown={(e) => handleKeyDownOnTrigger(e, 'services')}
               aria-expanded={activeMenu === 'services'}
               aria-haspopup="true"
@@ -275,12 +281,13 @@ export default function Navbar() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="absolute top-[calc(100%+16px)] left-1/2 -translate-x-1/2 pointer-events-auto bg-white border border-gray-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl w-[480px] overflow-hidden flex flex-col"
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-4 w-[480px] z-50"
                   onMouseEnter={() => handleMouseEnter('services')}
                   onMouseLeave={handleMouseLeave}
                   role="menu"
                 >
-                  <div className="p-3 flex flex-col">
+                  <div className="pointer-events-auto bg-white border border-gray-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl flex flex-col overflow-hidden max-h-[calc(100vh-120px)]">
+                    <div className="p-3 flex flex-col overflow-y-auto">
                     {servicesList.map((service, idx) => (
                       <Link 
                         href="#" 
@@ -312,6 +319,7 @@ export default function Navbar() {
                       <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" />
                     </Link>
                   </div>
+                </div>
                 </motion.div>
               )}
             </AnimatePresence>
