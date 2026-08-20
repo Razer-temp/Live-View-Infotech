@@ -111,9 +111,9 @@ export default function ServicesTabs() {
   const [activeTab, setActiveTab] = useState(solutions[0]);
 
   return (
-    <section id="industries" className="w-full flex flex-col md:flex-row min-h-[650px] overflow-hidden">
+    <section id="industries" className="w-full flex flex-col md:flex-row min-h-[auto] md:min-h-[650px] overflow-hidden">
       {/* Left side: Image and Interactive Icons */}
-      <div className="relative w-full md:w-1/2 flex items-center justify-center bg-[#09152e] overflow-hidden touch-manipulation select-none">
+      <div className="relative w-full md:w-1/2 flex items-center justify-center bg-[#09152e] overflow-hidden touch-manipulation select-none min-h-[280px] sm:min-h-[350px] md:min-h-0">
         {/* Inner wrapper that maintains the exact aspect ratio of the image AND scales to cover the parent */}
         <div 
           className="relative shrink-0 min-w-full min-h-full"
@@ -147,8 +147,8 @@ export default function ServicesTabs() {
                 {/* Outer pulse ring for active state */}
                 {isActive && (
                   <>
-                    <span className="absolute inline-flex h-[72px] w-[72px] animate-ping rounded-full bg-white/30 duration-1000"></span>
-                    <span className="absolute inline-flex h-[64px] w-[64px] rounded-full bg-white/10 animate-pulse"></span>
+                    <span className="absolute inline-flex h-[56px] w-[56px] sm:h-[72px] sm:w-[72px] animate-ping rounded-full bg-white/30 duration-1000"></span>
+                    <span className="absolute inline-flex h-[48px] w-[48px] sm:h-[64px] sm:w-[64px] rounded-full bg-white/10 animate-pulse"></span>
                   </>
                 )}
 
@@ -157,14 +157,19 @@ export default function ServicesTabs() {
                   className={`
                     relative flex items-center justify-center rounded-full transition-all duration-300 shadow-lg
                     ${isActive
-                      ? 'w-[56px] h-[56px] bg-white border-[3px] border-primary shadow-[0_0_24px_rgba(9,93,168,0.6)] scale-110'
-                      : 'w-[44px] h-[44px] bg-white/90 border-2 border-white/60 hover:bg-white hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] backdrop-blur-sm'
+                      ? 'w-[44px] h-[44px] sm:w-[56px] sm:h-[56px] bg-white border-[3px] border-primary shadow-[0_0_24px_rgba(9,93,168,0.6)] scale-110'
+                      : 'w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] bg-white/90 border-2 border-white/60 hover:bg-white hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.5)] backdrop-blur-sm'
                     }
                   `}
                 >
                   <Icon
+                    size={isActive ? 22 : 16}
+                    className={`sm:hidden transition-colors duration-300 ${isActive ? 'text-primary' : 'text-primary/80 group-hover:text-primary'}`}
+                    strokeWidth={isActive ? 2.2 : 1.8}
+                  />
+                  <Icon
                     size={isActive ? 26 : 20}
-                    className={`transition-colors duration-300 ${isActive ? 'text-primary' : 'text-primary/80 group-hover:text-primary'}`}
+                    className={`hidden sm:block transition-colors duration-300 ${isActive ? 'text-primary' : 'text-primary/80 group-hover:text-primary'}`}
                     strokeWidth={isActive ? 2.2 : 1.8}
                   />
                 </div>
@@ -191,7 +196,7 @@ export default function ServicesTabs() {
       </div>
 
       {/* Right side: Content */}
-      <div className="w-full md:w-1/2 bg-primary p-8 md:p-12 lg:p-16 xl:p-20 flex flex-col justify-center min-h-[550px]">
+      <div className="w-full md:w-1/2 bg-primary p-6 sm:p-8 md:p-12 lg:p-16 xl:p-20 flex flex-col justify-center min-h-[auto] sm:min-h-[550px]">
         <div className="max-w-xl">
           <AnimatePresence mode="wait">
             <motion.div

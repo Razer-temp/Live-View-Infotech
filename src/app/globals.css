@@ -91,3 +91,34 @@
   -ms-touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* ─── Mobile Optimizations ──────────────────────────────────── */
+
+/* Remove tap highlights on all interactive elements for mobile */
+a,
+button,
+[role="button"],
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure smooth momentum scrolling for overflow containers */
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* ─── Mobile Navbar Specific ────────────────────────────────── */
+@media (max-width: 1023px) {
+  /* Reduce navbar height on mobile for more content space */
+  .navbar-spacer {
+    height: 72px;
+  }
+}

@@ -14,7 +14,9 @@ import {
   Network, 
   Building2, 
   Wrench,
-  ArrowRight
+  ArrowRight,
+  X,
+  Menu
 } from 'lucide-react';
 
 const servicesList = [
@@ -63,6 +65,8 @@ const servicesList = [
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -76,6 +80,18 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   // Handle click outside and Escape key
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -87,7 +103,7 @@ export default function Navbar() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setActiveMenu(null);
-        // Optionally return focus to trigger if needed
+        setMobileMenuOpen(false);
       }
     };
 
@@ -125,6 +141,11 @@ export default function Navbar() {
     setActiveMenu(null);
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+    setMobileServicesOpen(false);
+  };
+
   const dropdownVariants: Variants = {
     hidden: { 
       opacity: 0, 
@@ -148,6 +169,46 @@ export default function Navbar() {
     }
   };
 
+  // Mobile overlay variants
+  const overlayVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { duration: 0.3, ease: "easeOut" }
+    },
+    exit: { 
+      opacity: 0,
+      transition: { duration: 0.25, ease: "easeIn" }
+    }
+  };
+
+  const mobileMenuVariants: Variants = {
+    hidden: { x: '100%' },
+    visible: { 
+      x: 0,
+      transition: { 
+        type: 'spring',
+        damping: 30,
+        stiffness: 300,
+        mass: 0.8
+      }
+    },
+    exit: { 
+      x: '100%',
+      transition: { duration: 0.25, ease: [0.4, 0, 1, 1] }
+    }
+  };
+
+  const mobileNavItemVariants: Variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      x: 0,
+      transition: { delay: 0.1 + i * 0.06, duration: 0.35, ease: "easeOut" }
+    }),
+    exit: { opacity: 0, x: 10, transition: { duration: 0.15 } }
+  };
+
   return (
     <>
       <div 
@@ -158,10 +219,10 @@ export default function Navbar() {
         onMouseLeave={handleMouseLeave}
       >
       {/* Header Container */}
-      <header className="max-w-[1140px] w-full mx-auto flex items-center justify-between h-[84px] px-6 lg:px-8">
+      <header className="max-w-[1140px] w-full mx-auto flex items-center justify-between h-[72px] lg:h-[84px] px-4 sm:px-6 lg:px-8">
         
         {/* Logo */}
-        <div className="flex-1 flex items-center justify-start shrink-0">
+        <div className="flex items-center justify-start shrink-0">
           <Link href="/" className="flex items-center shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md">
             <Image
               src="/Logo.png"
@@ -169,13 +230,13 @@ export default function Navbar() {
               width={260}
               height={76}
               priority
-              className="h-[64px] lg:h-[72px] w-auto object-contain"
+              className="h-[52px] sm:h-[58px] lg:h-[72px] w-auto object-contain"
             />
           </Link>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex items-center justify-center gap-2 lg:gap-4 shrink-0">
+        {/* Desktop Navigation — hidden below lg */}
+        <nav className="hidden lg:flex items-center justify-center gap-2 lg:gap-4 shrink-0">
           <Link 
             href="/" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
@@ -280,8 +341,8 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Right Action */}
-        <div className="flex-1 flex items-center justify-end shrink-0">
+        {/* Desktop CTA — hidden below lg */}
+        <div className="hidden lg:flex items-center justify-end shrink-0">
           <Link 
             href="#" 
             className="px-6 py-2.5 bg-blue-600 text-white text-[15px] font-semibold rounded-full hover:bg-blue-700 hover:shadow-[0_4px_12px_rgba(37,99,235,0.3)] transition-all duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
@@ -289,9 +350,237 @@ export default function Navbar() {
             Get a Free Quote
           </Link>
         </div>
+
+        {/* Mobile Hamburger Button — visible below lg */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden relative z-[110] flex items-center justify-center w-11 h-11 rounded-xl text-gray-700 hover:bg-gray-100 active:bg-gray-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {mobileMenuOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X className="w-6 h-6" strokeWidth={2} />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu className="w-6 h-6" strokeWidth={2} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
       </header>
     </div>
-    <div className="h-[84px] w-full shrink-0" aria-hidden="true" />
+
+    {/* ─── Mobile Menu Overlay ────────────────────────────────────── */}
+    <AnimatePresence>
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed inset-0 z-[98] bg-black/40 backdrop-blur-sm lg:hidden"
+            onClick={closeMobileMenu}
+          />
+
+          {/* Slide-in Panel */}
+          <motion.div
+            variants={mobileMenuVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="fixed top-0 right-0 z-[99] w-[min(85vw,380px)] h-full bg-white shadow-2xl lg:hidden flex flex-col overflow-hidden"
+          >
+            {/* Panel Header */}
+            <div className="flex items-center justify-between h-[72px] px-5 border-b border-gray-100 shrink-0">
+              <span className="text-[13px] font-bold tracking-[0.1em] uppercase text-gray-400">
+                Menu
+              </span>
+              <button
+                onClick={closeMobileMenu}
+                className="flex items-center justify-center w-10 h-10 rounded-xl text-gray-500 hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                aria-label="Close menu"
+              >
+                <X className="w-5 h-5" strokeWidth={2} />
+              </button>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="flex-1 overflow-y-auto overscroll-contain px-5 pt-6 pb-8">
+              <div className="flex flex-col gap-1">
+                {/* Home */}
+                <motion.div custom={0} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
+                  <Link
+                    href="/"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                  >
+                    Home
+                  </Link>
+                </motion.div>
+
+                {/* Services Accordion */}
+                <motion.div custom={1} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
+                  <button
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="flex items-center justify-between w-full px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                    aria-expanded={mobileServicesOpen}
+                  >
+                    <span>Services</span>
+                    <motion.div
+                      animate={{ rotate: mobileServicesOpen ? 180 : 0 }}
+                      transition={{ duration: 0.25, ease: "easeInOut" }}
+                    >
+                      <ChevronDown className="w-5 h-5 text-gray-400" />
+                    </motion.div>
+                  </button>
+
+                  {/* Services Sub-items */}
+                  <AnimatePresence>
+                    {mobileServicesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1, transition: { height: { duration: 0.3, ease: 'easeOut' }, opacity: { duration: 0.2, delay: 0.1 } } }}
+                        exit={{ height: 0, opacity: 0, transition: { height: { duration: 0.25, ease: 'easeIn' }, opacity: { duration: 0.15 } } }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pl-3 pr-1 py-2 flex flex-col gap-0.5">
+                          {servicesList.map((service, idx) => (
+                            <Link
+                              href="#"
+                              key={idx}
+                              onClick={closeMobileMenu}
+                              className="group flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-blue-50/60 active:bg-blue-50 transition-colors"
+                            >
+                              <div className="bg-gray-100 p-2 rounded-lg text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors shrink-0">
+                                <service.icon className="w-4 h-4" strokeWidth={1.75} />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <span className="text-[14px] font-semibold text-gray-800 group-hover:text-blue-700 transition-colors block truncate">
+                                  {service.title}
+                                </span>
+                                <span className="text-[12px] text-gray-500 leading-tight block truncate">
+                                  {service.desc}
+                                </span>
+                              </div>
+                            </Link>
+                          ))}
+                          
+                          {/* View All Services */}
+                          <Link
+                            href="#"
+                            onClick={closeMobileMenu}
+                            className="flex items-center gap-2 px-3 py-2.5 mt-1 text-[13px] font-semibold text-blue-600 rounded-lg hover:bg-blue-50/60 transition-colors"
+                          >
+                            View All Services
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+                {/* Industries We Serve */}
+                <motion.div custom={2} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
+                  <Link
+                    href="#"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                  >
+                    Industries We Serve
+                  </Link>
+                </motion.div>
+
+                {/* About Us */}
+                <motion.div custom={3} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
+                  <Link
+                    href="#"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                  >
+                    About Us
+                  </Link>
+                </motion.div>
+
+                {/* Contact */}
+                <motion.div custom={4} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
+                  <Link
+                    href="#"
+                    onClick={closeMobileMenu}
+                    className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </motion.div>
+              </div>
+
+              {/* Divider */}
+              <div className="my-6 border-t border-gray-100" />
+
+              {/* Contact Info */}
+              <motion.div custom={5} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
+                <div className="px-4 space-y-3">
+                  <p className="text-[12px] font-bold tracking-[0.1em] uppercase text-gray-400 mb-3">
+                    Get in Touch
+                  </p>
+                  <a 
+                    href="tel:+918789090210" 
+                    className="block text-[14px] text-gray-600 hover:text-blue-600 transition-colors"
+                  >
+                    +91 87890 90210
+                  </a>
+                  <a 
+                    href="mailto:liveviewinfotech@gmail.com" 
+                    className="block text-[14px] text-gray-600 hover:text-blue-600 transition-colors break-all"
+                  >
+                    liveviewinfotech@gmail.com
+                  </a>
+                </div>
+              </motion.div>
+            </nav>
+
+            {/* Bottom CTA */}
+            <motion.div
+              custom={6}
+              variants={mobileNavItemVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="px-5 py-5 border-t border-gray-100 shrink-0"
+            >
+              <Link
+                href="#"
+                onClick={closeMobileMenu}
+                className="flex items-center justify-center gap-2 w-full py-3.5 bg-blue-600 text-white text-[15px] font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors shadow-lg shadow-blue-600/20"
+              >
+                Get a Free Quote
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+
+    {/* Spacer to prevent content from going under fixed nav */}
+    <div className="h-[72px] lg:h-[84px] w-full shrink-0" aria-hidden="true" />
     </>
   );
 }

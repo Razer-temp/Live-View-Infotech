@@ -221,7 +221,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="hero-section relative w-full h-[calc(100vh-84px)] min-h-[550px] flex items-center overflow-hidden bg-[#0e1015]"
+      className="hero-section relative w-full h-[calc(100vh-72px)] lg:h-[calc(100vh-84px)] min-h-[480px] sm:min-h-[550px] flex items-center overflow-hidden bg-[#0e1015]"
       aria-label="Hero banner"
     >
       {/* ── Background Images ──────────────────────────────── */}
@@ -266,31 +266,31 @@ export default function Hero() {
       </div>
 
       {/* ── Foreground Content ─────────────────────────────── */}
-      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-6 md:px-10">
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10">
         <div className="max-w-[650px] text-left">
           {/* Rotating eyebrow + sub-line */}
           <div
             ref={textRef}
-            className="hero-rotating-text mb-8 p-5 md:p-6 rounded-2xl bg-black/20 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] inline-block relative overflow-hidden group"
+            className="hero-rotating-text mb-5 sm:mb-8 p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] inline-block relative overflow-hidden group"
             style={{ opacity: 0 }}
           >
             {/* Subtle animated gradient glow */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-50 pointer-events-none" />
 
-            <div className="relative z-10 flex items-center gap-3 mb-2 hero-rotating-eyebrow" style={{ opacity: 0, transform: 'translateY(15px)' }}>
+            <div className="relative z-10 flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2 hero-rotating-eyebrow" style={{ opacity: 0, transform: 'translateY(15px)' }}>
               <span className="block w-[4px] h-[18px] bg-primary rounded-full shrink-0 shadow-[0_0_12px_rgba(9,93,168,0.8)]" />
-              <span className="text-[13px] md:text-[14px] font-bold tracking-[0.12em] uppercase text-white drop-shadow-md">
+              <span className="text-[11px] sm:text-[13px] md:text-[14px] font-bold tracking-[0.1em] sm:tracking-[0.12em] uppercase text-white drop-shadow-md">
                 {displayedSlide.eyebrow}
               </span>
             </div>
-            <p className="relative z-10 text-[18px] md:text-[22px] font-medium text-white leading-snug drop-shadow-lg hero-rotating-subline" style={{ opacity: 0, transform: 'translateY(15px)' }}>
+            <p className="relative z-10 text-[15px] sm:text-[18px] md:text-[22px] font-medium text-white leading-snug drop-shadow-lg hero-rotating-subline" style={{ opacity: 0, transform: 'translateY(15px)' }}>
               {displayedSlide.subline}
             </p>
           </div>
 
           {/* Static headline */}
           <h1
-            className="hero-static-element text-[36px] sm:text-[44px] md:text-[52px] lg:text-[58px] font-bold text-white leading-[1.08] tracking-tight mb-6 drop-shadow-lg"
+            className="hero-static-element text-[28px] sm:text-[36px] md:text-[52px] lg:text-[58px] font-bold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6 drop-shadow-lg"
             style={{ opacity: 0, transform: 'translateY(30px)' }}
           >
             Securing Today,
@@ -301,7 +301,7 @@ export default function Hero() {
           {/* Static CTA button */}
           <a
             href="#"
-            className="hero-static-element inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-3.5 text-[15px] md:text-[16px] font-semibold rounded-full hover:bg-primary-hover hover:-translate-y-[1px] hover:shadow-lg transition-all duration-200"
+            className="hero-static-element inline-flex items-center justify-center gap-2 bg-primary text-white px-6 sm:px-8 py-3 sm:py-3.5 text-[14px] sm:text-[15px] md:text-[16px] font-semibold rounded-full hover:bg-primary-hover active:bg-primary-hover hover:-translate-y-[1px] hover:shadow-lg transition-all duration-200"
             style={{ opacity: 0, transform: 'translateY(30px)' }}
           >
             Get a Free Quote
@@ -311,7 +311,7 @@ export default function Hero() {
       </div>
 
       {/* ── Slide Indicator Dots ───────────────────────────── */}
-      <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
+      <div className="absolute bottom-5 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
         {heroSlides.map((_, index) => (
           <span
             key={index}

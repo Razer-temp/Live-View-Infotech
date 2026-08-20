@@ -24,15 +24,15 @@ export default function Footer() {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
   return (
-    <footer className="bg-text-dark text-white relative flex flex-col pt-20 overflow-hidden min-h-screen justify-end">
+    <footer className="bg-text-dark text-white relative flex flex-col pt-12 sm:pt-20 overflow-hidden min-h-[auto] sm:min-h-screen justify-end">
       {/* Top / Middle Section Wrapper */}
       <div className="container mx-auto px-6 lg:px-12 flex-1 flex flex-col justify-center max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 lg:mb-32 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-12 sm:mb-20 lg:mb-32 mt-8 sm:mt-12">
 
           {/* Left Column - CTA */}
           <div className="flex flex-col items-start justify-between">
             <div>
-              <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-4 sm:mb-6">
                 Have a site to protect?
                 <br />
                 <span className="text-gray-400">Let's secure it.</span>
@@ -41,11 +41,11 @@ export default function Footer() {
 
             <a
               href="mailto:liveviewinfotech@gmail.com"
-              className="group relative inline-flex items-center gap-4 mt-8 md:mt-24 text-2xl lg:text-4xl font-medium"
+              className="group relative inline-flex items-center gap-3 sm:gap-4 mt-6 sm:mt-8 md:mt-24 text-lg sm:text-2xl lg:text-4xl font-medium break-all sm:break-normal"
             >
               liveviewinfotech@gmail.com
               <span className="p-3 lg:p-4 bg-primary text-white rounded-full group-hover:bg-primary-hover transition-colors duration-300 flex-shrink-0">
-                <ArrowUpRight className="w-6 h-6 lg:w-8 lg:h-8 group-hover:rotate-45 transition-transform duration-300" />
+                <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 lg:w-8 lg:h-8 group-hover:rotate-45 transition-transform duration-300" />
               </span>
               <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
             </a>
@@ -55,7 +55,7 @@ export default function Footer() {
           <div className="flex flex-col md:items-end justify-between">
 
             {/* Quick Links */}
-            <div className="flex flex-col md:items-end gap-4 text-lg lg:text-xl font-medium mb-12">
+            <div className="flex flex-col md:items-end gap-3 sm:gap-4 text-base sm:text-lg lg:text-xl font-medium mb-8 sm:mb-12">
               {quickLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -87,7 +87,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-300">Contact:</p>
-                  <p>+91 87890 90210 / +91 70044 84706</p>
+                  <p>+91 87890 90210</p>
                 </div>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function Footer() {
           className="relative w-full flex justify-center mt-4 px-[20px] -mb-[2.5vw]"
           onMouseLeave={() => setHoveredIndex(null)}
         >
-          <h1 className={`text-[11.5vw] flex justify-center leading-[0.8] select-none whitespace-nowrap text-center w-full uppercase ${anton.className}`}>
+          <h1 className={`text-[14vw] sm:text-[11.5vw] flex justify-center leading-[0.8] select-none whitespace-nowrap text-center w-full uppercase ${anton.className}`}>
             {"LET'S WORK TOGETHER".split("").map((char, index) => {
               const isHovered = hoveredIndex !== null;
               const distance = isHovered ? Math.abs(hoveredIndex - index) : Infinity;
