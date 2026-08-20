@@ -340,7 +340,7 @@ export default function Navbar() {
             <span className="absolute bottom-1 left-3 right-3 h-[2px] bg-blue-600 origin-center scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
           </Link>
           <Link 
-            href="#" 
+            href="/contact" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             Contact
@@ -351,7 +351,7 @@ export default function Navbar() {
         {/* Desktop CTA — hidden below lg */}
         <div className="hidden lg:flex items-center justify-end shrink-0">
           <Link 
-            href="#" 
+            href="/contact" 
             className="px-6 py-2.5 bg-blue-600 text-white text-[15px] font-semibold rounded-full hover:bg-blue-700 hover:shadow-[0_4px_12px_rgba(37,99,235,0.3)] transition-all duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
           >
             Get a Free Quote
@@ -530,7 +530,7 @@ export default function Navbar() {
                 {/* Contact */}
                 <motion.div custom={4} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
                   <Link
-                    href="#"
+                    href="/contact"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
@@ -574,7 +574,7 @@ export default function Navbar() {
               className="px-5 py-5 border-t border-gray-100 shrink-0"
             >
               <Link
-                href="#"
+                href="/contact"
                 onClick={closeMobileMenu}
                 className="flex items-center justify-center gap-2 w-full py-3.5 bg-blue-600 text-white text-[15px] font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors shadow-lg shadow-blue-600/20"
               >
