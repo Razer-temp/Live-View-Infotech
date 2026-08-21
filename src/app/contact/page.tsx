@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, Suspense } from 'react';
+import { useState, useRef, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
@@ -168,12 +168,18 @@ function CustomSelect({
 
 /* ─── Main Contact Page ────────────────────────────────────────── */
 
+/* ─── Tiny component that reads URL params without suspending the whole page ── */
+function SearchParamSync({ onServiceParam }: { onServiceParam: (slug: string) => void }) {
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam) onServiceParam(serviceParam);
+  }, [searchParams, onServiceParam]);
+  return null;
+}
+
 export default function ContactPage() {
-  return (
-    <Suspense>
-      <ContactPageContent />
-    </Suspense>
-  );
+  return <ContactPageContent />;
 }
 
 function ContactPageContent() {
@@ -188,17 +194,13 @@ function ContactPageContent() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
-  // Read ?service= param and auto-select
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    const serviceParam = searchParams.get('service');
-    if (serviceParam) {
-      const match = serviceOptions.find((s) => s.slug === serviceParam);
-      if (match && !services.includes(match.label)) {
-        setServices((prev) => [...prev, match.label]);
-      }
+  // Callback for the SearchParamSync component
+  const handleServiceParam = useCallback((slug: string) => {
+    const match = serviceOptions.find((s) => s.slug === slug);
+    if (match) {
+      setServices((prev) => prev.includes(match.label) ? prev : [...prev, match.label]);
     }
-  }, [searchParams]);
+  }, []);
 
   // Refs for scroll animations
   const heroRef = useRef(null);
@@ -272,6 +274,11 @@ function ContactPageContent() {
 
   return (
     <>
+      {/* Reads ?service= param without blocking the whole page render */}
+      <Suspense fallback={null}>
+        <SearchParamSync onServiceParam={handleServiceParam} />
+      </Suspense>
+
       <Navbar />
       <main className="w-full bg-white min-h-screen">
         {/* ─── Hero Banner ─────────────────────────────────────────── */}

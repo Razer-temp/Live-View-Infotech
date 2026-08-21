@@ -2,39 +2,69 @@
 
 import { useRef, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { ArrowRight } from 'lucide-react';
 
 /* ─── Slide data ─────────────────────────────────────────────── */
 const heroSlides = [
   {
-    src: '/hero-img/hero-img3.png',
-    alt: 'Commercial office entrance with CCTV dome camera and access-control reader',
-    eyebrow: 'Workplaces & Commercial Spaces',
-    subline: 'Know who\u2019s walking through your door.',
-  },
-  {
     src: '/hero-img/hero-img1.png',
-    alt: 'Institutional building with CCTV camera mounted on canopy pillar',
-    eyebrow: 'Institutional Security',
-    subline: 'Protection built on public trust.',
-  },
-  {
-    src: '/hero-img/hero-img4.png',
-    alt: 'Industrial power-utility site with bullet camera on perimeter fence',
-    eyebrow: 'Industrial & Utility Sites',
-    subline: 'Perimeter security that never blinks.',
+    alt: 'Railway platform with CCTV camera on support beam — critical infrastructure surveillance',
+    eyebrow: 'Critical Infrastructure',
+    subline: 'Eyes on every platform, every hour.',
+    // Camera is right-of-center; on mobile crop toward the right
+    mobileObjectPosition: '70% center',
+    needsStrongGradient: true, // more centered framing
   },
   {
     src: '/hero-img/hero-img2.png',
-    alt: 'Railway platform with CCTV camera on support beam',
-    eyebrow: 'Critical Infrastructure',
-    subline: 'Eyes on every platform, every hour.',
+    alt: 'Office entrance with CCTV dome camera and biometric access reader',
+    eyebrow: 'Smart Access Control',
+    subline: 'Every entry, verified.',
+    // Camera & reader are right-of-center; on mobile keep right side
+    mobileObjectPosition: '65% center',
+    needsStrongGradient: true, // more centered framing
+  },
+  {
+    src: '/hero-img/hero-img3.png',
+    alt: 'High mast lighting pole with DG set and electrical panel at industrial site',
+    eyebrow: 'Power & Infrastructure',
+    subline: 'Reliable power, engineered to last.',
+    // Pole centered, DG/panel on right; open left sky
+    mobileObjectPosition: '55% center',
+    needsStrongGradient: false,
+  },
+  {
+    src: '/hero-img/hero-img4.png',
+    alt: 'Boom barrier with surveillance camera at controlled access gate',
+    eyebrow: 'Controlled Access',
+    subline: 'Know who enters, every time.',
+    // Barrier is centered; hedge/sky on the left is open space
+    mobileObjectPosition: '45% center',
+    needsStrongGradient: false,
+  },
+  {
+    src: '/hero-img/Hero-img5.png',
+    alt: 'Fire suppression piping, panel and extinguisher in commercial facility',
+    eyebrow: 'Fire Safety',
+    subline: 'Early warning. Real protection.',
+    // Fire equipment on the right wall; open space on left
+    mobileObjectPosition: '60% center',
+    needsStrongGradient: false,
+  },
+  {
+    src: '/hero-img/hero-img6.png',
+    alt: 'Solar-powered street light at industrial area',
+    eyebrow: 'Sustainable Infrastructure',
+    subline: 'Power where the grid doesn\u2019t reach.',
+    // Solar pole is right-of-center
+    mobileObjectPosition: '60% center',
+    needsStrongGradient: false,
   },
 ];
 
-const SLIDE_DURATION = 6000; // ms each slide is displayed
+const SLIDE_DURATION = 5500; // ms — 6 slides × 5.5s ≈ 33s full loop
 const CROSSFADE_DURATION = 1.2; // seconds for image cross-fade
 const TEXT_FADE_DURATION = 0.4; // seconds for text fade in/out
 
@@ -44,6 +74,7 @@ export default function Hero() {
   const textRef = useRef<HTMLDivElement>(null);
   const isTransitioning = useRef(false);
   const currentIndexRef = useRef(0);
+  const autoplayTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayedSlide, setDisplayedSlide] = useState(heroSlides[0]);
@@ -64,7 +95,7 @@ export default function Hero() {
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
-        // Animate static elements
+        // Animate static elements with stagger
         gsap.to('.hero-static-element', {
           y: 0,
           opacity: 1,
@@ -80,7 +111,7 @@ export default function Hero() {
           ease: 'power2.out',
           delay: 0.2,
         });
-        
+
         // Animate the text inside staggeringly
         gsap.to(['.hero-rotating-eyebrow', '.hero-rotating-subline'], {
           y: 0,
@@ -89,6 +120,16 @@ export default function Hero() {
           stagger: 0.15,
           ease: 'power3.out',
           delay: 0.4,
+        });
+
+        // Animate the dot indicators up
+        gsap.to('.hero-dot-indicator', {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          stagger: 0.06,
+          ease: 'power3.out',
+          delay: 0.8,
         });
       }, containerRef);
 
@@ -151,7 +192,7 @@ export default function Hero() {
         setDisplayedSlide(heroSlides[nextIndex]);
         currentIndexRef.current = nextIndex;
         setCurrentIndex(nextIndex);
-        
+
         // Reset position for next entry to ensure it comes from the bottom again
         gsap.set(['.hero-rotating-eyebrow', '.hero-rotating-subline'], { y: 15 });
       });
@@ -206,17 +247,36 @@ export default function Hero() {
     [prefersReducedMotion]
   );
 
-  /* ─── Autoplay loop ────────────────────────────────────────── */
-  useEffect(() => {
-    if (prefersReducedMotion || !hasLoaded) return;
-
-    const timer = setInterval(() => {
+  /* ─── Autoplay management ──────────────────────────────────── */
+  const startAutoplay = useCallback(() => {
+    if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
+    autoplayTimerRef.current = setInterval(() => {
       const next = (currentIndexRef.current + 1) % heroSlides.length;
       transitionToSlide(next);
     }, SLIDE_DURATION);
+  }, [transitionToSlide]);
 
-    return () => clearInterval(timer);
-  }, [prefersReducedMotion, hasLoaded, transitionToSlide]);
+  const resetAutoplay = useCallback(() => {
+    // Clear existing timer and restart — ensures a full SLIDE_DURATION before next auto-advance
+    startAutoplay();
+  }, [startAutoplay]);
+
+  useEffect(() => {
+    if (prefersReducedMotion || !hasLoaded) return;
+    startAutoplay();
+    return () => {
+      if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
+    };
+  }, [prefersReducedMotion, hasLoaded, startAutoplay]);
+
+  /* ─── Handle dot click ─────────────────────────────────────── */
+  const handleDotClick = useCallback(
+    (index: number) => {
+      transitionToSlide(index);
+      resetAutoplay(); // restart timer so it doesn't fire mid-transition
+    },
+    [transitionToSlide, resetAutoplay]
+  );
 
   return (
     <section
@@ -240,19 +300,24 @@ export default function Hero() {
               alt={slide.alt}
               fill
               priority={index === 0}
-              className="object-cover object-center"
+              className="hero-carousel-img object-cover"
               sizes="100vw"
+              style={{
+                objectPosition: slide.mobileObjectPosition,
+              }}
             />
           </div>
         ))}
 
-        {/* Gradient Overlays */}
-        {/* Left-heavy gradient for text readability */}
+        {/* Left-heavy gradient for text readability — stronger for centered images */}
         <div
           className="absolute inset-0 z-10"
           style={{
             background:
-              'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.1) 100%)',
+              displayedSlide.needsStrongGradient
+                ? 'linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.3) 45%, transparent 65%)'
+                : 'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.1) 100%)',
+            transition: 'background 0.8s ease',
           }}
         />
         {/* Bottom vignette */}
@@ -299,28 +364,31 @@ export default function Hero() {
           </h1>
 
           {/* Static CTA button */}
-          <a
-            href="#"
+          <Link
+            href="/contact"
             className="hero-static-element inline-flex items-center justify-center gap-2 bg-primary text-white px-6 sm:px-8 py-3 sm:py-3.5 text-[14px] sm:text-[15px] md:text-[16px] font-semibold rounded-full hover:bg-primary-hover active:bg-primary-hover hover:-translate-y-[1px] hover:shadow-lg transition-all duration-200"
             style={{ opacity: 0, transform: 'translateY(30px)' }}
           >
             Get a Free Quote
             <ArrowRight size={18} strokeWidth={2} className="ml-1" />
-          </a>
+          </Link>
         </div>
       </div>
 
-      {/* ── Slide Indicator Dots ───────────────────────────── */}
+      {/* ── Slide Indicator Dots (clickable) ────────────────── */}
       <div className="absolute bottom-5 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
         {heroSlides.map((_, index) => (
-          <span
+          <button
             key={index}
-            className={`block rounded-full transition-all duration-500 ease-in-out ${
+            type="button"
+            onClick={() => handleDotClick(index)}
+            className={`hero-dot-indicator block rounded-full transition-all duration-500 ease-in-out cursor-pointer ${
               index === currentIndex
-                ? 'w-7 h-[5px] bg-white'
-                : 'w-[5px] h-[5px] bg-white/40'
+                ? 'w-7 h-[5px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]'
+                : 'w-[5px] h-[5px] bg-white/40 hover:bg-white/70'
             }`}
-            aria-label={`Slide ${index + 1}${index === currentIndex ? ' (active)' : ''}`}
+            style={{ opacity: 0, transform: 'translateY(10px)' }}
+            aria-label={`Go to slide ${index + 1}${index === currentIndex ? ' (active)' : ''}`}
           />
         ))}
       </div>

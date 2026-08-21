@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { motion, AnimatePresence, useReducedMotion, Variants } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { 
   ChevronDown, 
   Video, 
@@ -357,12 +358,12 @@ export default function Navbar() {
 
         {/* Desktop CTA — hidden below lg */}
         <div className="hidden lg:flex items-center justify-end shrink-0">
-          <a 
+          <Link 
             href="/contact" 
             className="px-6 py-2.5 bg-blue-600 text-white text-[15px] font-semibold rounded-full hover:bg-blue-700 hover:shadow-[0_4px_12px_rgba(37,99,235,0.3)] transition-all duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
           >
             Get a Free Quote
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Hamburger Button — visible below lg */}
@@ -580,14 +581,14 @@ export default function Navbar() {
               exit="exit"
               className="px-5 py-5 border-t border-gray-100 shrink-0"
             >
-              <a
+              <Link
                 href="/contact"
                 onClick={closeMobileMenu}
                 className="flex items-center justify-center gap-2 w-full py-3.5 bg-blue-600 text-white text-[15px] font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors shadow-lg shadow-blue-600/20"
               >
                 Get a Free Quote
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </>

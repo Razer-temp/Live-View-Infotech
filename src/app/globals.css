@@ -63,6 +63,27 @@
   will-change: transform, opacity;
 }
 
+/*
+ * Uniform colour-correction filter across all 6 hero images.
+ * Evens out warm (img2, img6) vs cool (img1, img4, img5) colour temps
+ * so the carousel doesn't visually "jump" in mood as it rotates.
+ */
+.hero-carousel-img {
+  filter: contrast(1.03) saturate(0.95);
+}
+
+/*
+ * On mobile (portrait), override the inline object-position
+ * to use a taller crop that keeps the main subject visible.
+ * Each slide has a custom mobileObjectPosition in the data,
+ * but on wide screens we want natural center framing.
+ */
+@media (min-width: 768px) {
+  .hero-carousel-img {
+    object-position: center center !important;
+  }
+}
+
 /* Reduced-motion: disable zoom + hide autoplay indicator animation */
 @media (prefers-reduced-motion: reduce) {
   .hero-slide-image img {
@@ -73,6 +94,10 @@
 
   .hero-section .hero-rotating-text {
     transition: none !important;
+  }
+
+  .hero-carousel-img {
+    filter: none;
   }
 }
 
