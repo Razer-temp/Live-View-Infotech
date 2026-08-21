@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, BadgeCheck, Wrench, PhoneCall, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
 
 const checkListItems = [
@@ -141,13 +140,13 @@ export default function AboutSection() {
 
             {/* Button */}
             <motion.div variants={itemVariants} className="w-full sm:w-auto flex justify-center sm:justify-start">
-              <Link 
+              <a 
                 href="/about" 
                 className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-8 py-4 sm:py-4 min-h-[44px] bg-[#09152e] hover:bg-[#0a1c3d] text-white rounded-full font-medium transition-all duration-300 group"
               >
                 Learn More About Us
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, MapPin, Phone, FileText, ArrowRight } from "lucide-react";
@@ -67,13 +66,13 @@ export default function Footer() {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link
+              <a
                 href="/contact"
                 className="inline-flex items-center justify-center bg-primary hover:bg-primary-hover text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 group shadow-lg shadow-primary/20 hover:scale-[1.02] text-sm sm:text-base"
               >
                 Get a Free Quote
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
 
               <a
                 href="mailto:liveviewinfotech@gmail.com"
@@ -171,10 +170,10 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 sm:gap-4">
               {servicesList.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group inline-block w-fit">
+                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group inline-block w-fit">
                     <span className="inline-block group-hover:-translate-y-0.5 transition-transform">{link.name}</span>
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -186,10 +185,10 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 sm:gap-4">
               {companyLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group inline-flex items-center gap-2 w-fit">
+                  <a href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group inline-flex items-center gap-2 w-fit">
                     <span className="inline-block group-hover:-translate-y-0.5 transition-transform">{link.name}</span>
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -277,9 +276,9 @@ export default function Footer() {
         <div className="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-gray-400 font-medium">
           <p>© 2026 Live View Infotech. All rights reserved.</p>
           <div className="flex gap-6 items-center">
-            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
             <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-            <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
+            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

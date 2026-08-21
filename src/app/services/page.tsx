@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import {
@@ -361,13 +360,13 @@ function ServiceSection({
 
       {/* CTA */}
       <motion.div variants={checklistItem}>
-        <Link
+        <a
           href={`/contact?service=${service.contactParam}`}
           className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#095DA8] hover:bg-[#074883] text-white rounded-full font-semibold text-[14px] sm:text-[15px] transition-all duration-300 shadow-lg shadow-[#095DA8]/15 hover:shadow-xl hover:shadow-[#095DA8]/25 hover:-translate-y-0.5 group"
         >
           Request a quote for {service.title}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-        </Link>
+        </a>
       </motion.div>
     </motion.div>
   );
@@ -655,13 +654,13 @@ export default function ServicesPage() {
                 that fits your budget.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link
+                <a
                   href="/contact"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-[#09152e] rounded-full font-semibold text-[15px] hover:bg-blue-50 transition-all duration-300 shadow-xl shadow-black/20 hover:-translate-y-0.5 group"
                 >
                   Get a Free Quote
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
                 <a
                   href="tel:+918789090210"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/20 text-white rounded-full font-semibold text-[15px] hover:bg-white/5 hover:border-white/40 transition-all duration-300"

@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { motion, AnimatePresence, useReducedMotion, Variants } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 import { 
   ChevronDown, 
@@ -244,13 +243,13 @@ export default function Navbar() {
 
         {/* Desktop Navigation — hidden below lg */}
         <nav className="hidden lg:flex items-center justify-center gap-2 lg:gap-4 shrink-0">
-          <Link 
+          <a 
             href="/" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             Home
             <span className="absolute bottom-1 left-3 right-3 h-[2px] bg-blue-600 origin-center scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
-          </Link>
+          </a>
           
           {/* Services Dropdown Trigger */}
           <div 
@@ -297,7 +296,7 @@ export default function Navbar() {
                   <div className="pointer-events-auto bg-white border border-gray-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] rounded-2xl flex flex-col overflow-hidden max-h-[calc(100vh-120px)]">
                     <div className="p-3 flex flex-col overflow-y-auto">
                     {servicesList.map((service, idx) => (
-                      <Link 
+                      <a 
                         href={service.href} 
                         key={idx}
                         onClick={closeMenu}
@@ -311,13 +310,13 @@ export default function Navbar() {
                           <h4 className="text-[15px] font-semibold text-gray-900 mb-0.5 group-hover:text-blue-700 transition-colors duration-200">{service.title}</h4>
                           <p className="text-[13px] text-gray-500 leading-snug pr-4">{service.desc}</p>
                         </div>
-                      </Link>
+                      </a>
                     ))}
                   </div>
 
                   {/* Bottom Link */}
                   <div className="bg-[#f8f9fa] p-4 border-t border-gray-100">
-                    <Link 
+                    <a 
                       href="/services" 
                       onClick={closeMenu}
                       role="menuitem"
@@ -325,7 +324,7 @@ export default function Navbar() {
                     >
                       View All Services
                       <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
                 </motion.div>
@@ -333,37 +332,37 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          <Link 
+          <a 
             href="/#industries" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 whitespace-nowrap"
           >
             Industries We Serve
             <span className="absolute bottom-1 left-3 right-3 h-[2px] bg-blue-600 origin-center scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
-          </Link>
-          <Link 
+          </a>
+          <a 
             href="/about" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 whitespace-nowrap"
           >
             About Us
             <span className="absolute bottom-1 left-3 right-3 h-[2px] bg-blue-600 origin-center scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
-          </Link>
-          <Link 
+          </a>
+          <a 
             href="/contact" 
             className="group relative px-3 py-2 text-[15px] font-medium text-gray-700 hover:text-black transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
           >
             Contact
             <span className="absolute bottom-1 left-3 right-3 h-[2px] bg-blue-600 origin-center scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
-          </Link>
+          </a>
         </nav>
 
         {/* Desktop CTA — hidden below lg */}
         <div className="hidden lg:flex items-center justify-end shrink-0">
-          <Link 
+          <a 
             href="/contact" 
             className="px-6 py-2.5 bg-blue-600 text-white text-[15px] font-semibold rounded-full hover:bg-blue-700 hover:shadow-[0_4px_12px_rgba(37,99,235,0.3)] transition-all duration-300 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-600"
           >
             Get a Free Quote
-          </Link>
+          </a>
         </div>
 
         {/* Mobile Hamburger Button — visible below lg */}
@@ -442,13 +441,13 @@ export default function Navbar() {
               <div className="flex flex-col gap-1">
                 {/* Home */}
                 <motion.div custom={0} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
-                  <Link
+                  <a
                     href="/"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
                     Home
-                  </Link>
+                  </a>
                 </motion.div>
 
                 {/* Services Accordion */}
@@ -478,7 +477,7 @@ export default function Navbar() {
                       >
                         <div className="pl-3 pr-1 py-2 flex flex-col gap-0.5">
                           {servicesList.map((service, idx) => (
-                            <Link
+                            <a
                               href={service.href}
                               key={idx}
                               onClick={closeMobileMenu}
@@ -495,18 +494,18 @@ export default function Navbar() {
                                   {service.desc}
                                 </span>
                               </div>
-                            </Link>
+                            </a>
                           ))}
                           
                           {/* View All Services */}
-                          <Link
+                          <a
                             href="/services"
                             onClick={closeMobileMenu}
                             className="flex items-center gap-2 px-3 py-2.5 mt-1 text-[13px] font-semibold text-blue-600 rounded-lg hover:bg-blue-50/60 transition-colors"
                           >
                             View All Services
                             <ArrowRight className="w-3.5 h-3.5" />
-                          </Link>
+                          </a>
                         </div>
                       </motion.div>
                     )}
@@ -515,35 +514,35 @@ export default function Navbar() {
 
                 {/* Industries We Serve */}
                 <motion.div custom={2} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
-                  <Link
+                  <a
                     href="/#industries"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
                     Industries We Serve
-                  </Link>
+                  </a>
                 </motion.div>
 
                 {/* About Us */}
                 <motion.div custom={3} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
-                  <Link
+                  <a
                     href="/about"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
                     About Us
-                  </Link>
+                  </a>
                 </motion.div>
 
                 {/* Contact */}
                 <motion.div custom={4} variants={mobileNavItemVariants} initial="hidden" animate="visible" exit="exit">
-                  <Link
+                  <a
                     href="/contact"
                     onClick={closeMobileMenu}
                     className="flex items-center gap-3 px-4 py-3.5 text-[16px] font-medium text-gray-800 rounded-xl hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
                     Contact
-                  </Link>
+                  </a>
                 </motion.div>
               </div>
 
@@ -581,14 +580,14 @@ export default function Navbar() {
               exit="exit"
               className="px-5 py-5 border-t border-gray-100 shrink-0"
             >
-              <Link
+              <a
                 href="/contact"
                 onClick={closeMobileMenu}
                 className="flex items-center justify-center gap-2 w-full py-3.5 bg-blue-600 text-white text-[15px] font-semibold rounded-xl hover:bg-blue-700 active:bg-blue-800 transition-colors shadow-lg shadow-blue-600/20"
               >
                 Get a Free Quote
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
         </>

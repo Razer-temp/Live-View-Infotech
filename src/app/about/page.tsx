@@ -1,6 +1,5 @@
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   ShieldCheck,
   BadgeCheck,
@@ -275,13 +274,13 @@ export default function AboutPage() {
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                   Our work spans commercial buildings, institutions, industrial sites, and public infrastructure. We understand that every sector has unique compliance and operational requirements.
                 </p>
-                <Link
+                <a
                   href="/industries"
                   className="inline-flex items-center gap-2 text-[#095DA8] font-semibold hover:text-[#074883] transition-colors group"
                 >
                   See the full list of industries we serve
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
               </div>
 
               {/* Right Side */}
@@ -292,10 +291,10 @@ export default function AboutPage() {
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-[#095DA8]/10 rounded-full flex items-center justify-center text-[#095DA8]">
-                    <span className="font-bold">RD</span> {/* Placeholder initials */}
+                    <span className="font-bold">KS</span> {/* Placeholder initials */}
                   </div>
                   <div>
-                    <p className="font-bold text-gray-900">Rahul Deshmukh</p> {/* Placeholder name, change as needed */}
+                    <p className="font-bold text-gray-900">Kadir Sha</p> {/* Placeholder name, change as needed */}
                     <p className="text-sm text-gray-500">Founder, Live View Infotech</p>
                   </div>
                 </div>
@@ -304,12 +303,12 @@ export default function AboutPage() {
 
             {/* Bottom CTA */}
             <div className="text-center">
-              <Link
+              <a
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#095DA8] hover:bg-[#074883] text-white rounded-full text-lg font-semibold transition-all duration-300 shadow-[0_8px_20px_rgba(9,93,168,0.25)] hover:shadow-[0_12px_25px_rgba(9,93,168,0.35)] hover:-translate-y-1"
               >
                 Get a Free Quote
-              </Link>
+              </a>
             </div>
 
           </div>
