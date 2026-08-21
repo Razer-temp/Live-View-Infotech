@@ -35,61 +35,95 @@ export default function Footer() {
     <footer className="bg-text-dark text-white relative flex flex-col pt-12 sm:pt-20 overflow-hidden min-h-[auto] sm:min-h-screen justify-end">
       {/* Section 1 - CTA Banner */}
       <div className="container mx-auto px-6 lg:px-12 flex-1 flex flex-col max-w-7xl">
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-16 mb-16 sm:mb-24 mt-8 sm:mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16 sm:mb-24 mt-6 sm:mt-10">
           
-          {/* Left side text */}
-          <div className="flex flex-col items-start w-full lg:w-7/12 justify-center">
-            <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-[7rem] font-bold tracking-tight mb-4 sm:mb-6 leading-[1.05]">
-              Have a site<br className="hidden sm:block" />
-              to protect?<br />
-              <span className="text-gray-400">Let's secure<br className="hidden sm:block" />
-              it.</span>
-            </h2>
-          </div>
-
-          {/* Right side map & contact links */}
-          <div className="flex flex-col w-full lg:w-5/12 gap-6 max-w-lg lg:max-w-none mx-auto lg:mx-0">
-            
-            {/* Map Block */}
-            <div className="w-full relative group h-[200px] lg:h-[220px] bg-gray-900 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
-              <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
-              
-              <a href="https://maps.app.goo.gl/9R684JqF2xZ6283R7" target="_blank" rel="noopener noreferrer" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:top-4 md:translate-y-0 md:left-auto md:right-4 md:translate-x-0 z-20 bg-white/95 text-text-dark hover:bg-primary hover:text-white px-4 py-2 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-105">
-                View on Google Maps
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-              
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6025553551537!2d86.4172458!3d23.7971556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6a2b8e55e8c15%3A0x6a2c2b3f1244f7b2!2sMatkuria%20Flyover%2C%20Dhanbad%2C%20Jharkhand%20826001!5e0!3m2!1sen!2sin!4v1709665510000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0, filter: 'grayscale(20%) contrast(1.1)' }} 
-                allowFullScreen={false} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full object-cover"
-              ></iframe>
+          {/* Left Column: Typography & CTAs */}
+          <div className="lg:col-span-7 flex flex-col items-start justify-center">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300 font-medium mb-6 backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              Fast Turnaround · Certified Technical Team
             </div>
 
-            {/* Email and Quote Buttons */}
-            <div className="flex flex-col sm:flex-row w-full items-start sm:items-center justify-between gap-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4 sm:mb-5 leading-[1.15]">
+              Have a site to protect? <br />
+              <span className="text-gray-400">Let's secure it.</span>
+            </h2>
+
+            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-xl mb-8 leading-relaxed">
+              Connect with our experts for turnkey CCTV surveillance, biometric access control, fire safety, and electrical solutions tailored to your site.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center justify-center bg-primary hover:bg-primary-hover text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 group shadow-lg shadow-primary/20 hover:scale-[1.02] text-sm sm:text-base"
+              >
+                Get a Free Quote
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
               <a
                 href="mailto:liveviewinfotech@gmail.com"
-                className="group relative inline-flex items-center gap-2 sm:gap-3 text-lg sm:text-xl font-medium break-all sm:break-normal shrink-0"
+                className="group inline-flex items-center gap-3 px-5 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 hover:text-white transition-all duration-300 text-sm sm:text-base font-medium backdrop-blur-sm"
               >
-                liveviewinfotech@gmail.com
-                <span className="p-2 bg-primary text-white rounded-full group-hover:bg-primary-hover transition-colors duration-300 shadow-lg">
-                  <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
+                <span>liveviewinfotech@gmail.com</span>
+                <span className="p-1 rounded-full bg-white/10 group-hover:bg-primary group-hover:text-white transition-colors">
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
                 </span>
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
-              
-              <Link href="/contact" className="inline-flex items-center justify-center bg-white text-text-dark font-semibold px-5 py-2.5 rounded-full hover:bg-gray-100 transition-colors duration-300 group shadow-lg whitespace-nowrap text-sm sm:text-base">
-                Get a Free Quote
-                <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" />
-              </Link>
             </div>
           </div>
+
+          {/* Right Column: Glassmorphic Location Card */}
+          <div className="lg:col-span-5 w-full">
+            <div className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-3xl p-4 sm:p-5 backdrop-blur-xl shadow-2xl transition-all duration-300">
+              
+              {/* Card Header */}
+              <div className="flex items-center justify-between mb-3.5 px-1">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  </span>
+                  <span className="text-xs sm:text-sm font-semibold text-gray-200">Registered HQ · Dhanbad</span>
+                </div>
+                
+                <a
+                  href="https://maps.app.goo.gl/9R684JqF2xZ6283R7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1 transition-colors group px-2.5 py-1 rounded-full bg-primary/10 hover:bg-primary"
+                >
+                  <span>Open Maps</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
+
+              {/* Map View Frame */}
+              <div className="w-full h-[190px] sm:h-[210px] rounded-2xl overflow-hidden relative border border-white/10 bg-gray-900 shadow-inner">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6025553551537!2d86.4172458!3d23.7971556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6a2b8e55e8c15%3A0x6a2c2b3f1244f7b2!2sMatkuria%20Flyover%2C%20Dhanbad%2C%20Jharkhand%20826001!5e0!3m2!1sen!2sin!4v1709665510000!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0, filter: 'grayscale(20%) contrast(1.1)' }} 
+                  allowFullScreen={false} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full object-cover"
+                ></iframe>
+              </div>
+
+              {/* Card Footer info */}
+              <div className="mt-3 flex items-center justify-between text-xs text-gray-400 px-1 pt-1">
+                <div className="flex items-center gap-1.5 truncate">
+                  <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span className="truncate">Office No. 198, Ara More, Near Matkuria Flyover</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         {/* Section 2 - 4 Column Grid */}
