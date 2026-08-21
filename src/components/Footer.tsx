@@ -35,26 +35,28 @@ export default function Footer() {
     <footer className="bg-text-dark text-white relative flex flex-col pt-12 sm:pt-20 overflow-hidden min-h-[auto] sm:min-h-screen justify-end">
       {/* Section 1 - CTA Banner */}
       <div className="container mx-auto px-6 lg:px-12 flex-1 flex flex-col max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center mb-16 sm:mb-24 mt-6 sm:mt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-16 sm:mb-24 mt-6 sm:mt-10">
           
           {/* Left Column: Typography & CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-start justify-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300 font-medium mb-6 backdrop-blur-md">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              Fast Turnaround · Certified Technical Team
+          <div className="lg:col-span-7 flex flex-col justify-between py-2">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm text-gray-300 font-medium mb-6 backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Fast Turnaround · Certified Technical Team
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4 sm:mb-5 leading-[1.15]">
+                Have a site to protect? <br />
+                <span className="text-gray-400">Let's secure it.</span>
+              </h2>
+
+              <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-xl mb-8 leading-relaxed">
+                Connect with our experts for turnkey CCTV surveillance, biometric access control, fire safety, and electrical solutions tailored to your site.
+              </p>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4 sm:mb-5 leading-[1.15]">
-              Have a site to protect? <br />
-              <span className="text-gray-400">Let's secure it.</span>
-            </h2>
-
-            <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-xl mb-8 leading-relaxed">
-              Connect with our experts for turnkey CCTV surveillance, biometric access control, fire safety, and electrical solutions tailored to your site.
-            </p>
-
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link 
                 href="/contact" 
                 className="inline-flex items-center justify-center bg-primary hover:bg-primary-hover text-white font-semibold px-7 py-3.5 rounded-full transition-all duration-300 group shadow-lg shadow-primary/20 hover:scale-[1.02] text-sm sm:text-base"
@@ -75,12 +77,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Right Column: Glassmorphic Location Card */}
-          <div className="lg:col-span-5 w-full">
-            <div className="w-full bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-3xl p-4 sm:p-5 backdrop-blur-xl shadow-2xl transition-all duration-300">
+          {/* Right Column: Full-Height Glassmorphic Location Card */}
+          <div className="lg:col-span-5 w-full flex flex-col">
+            <div className="w-full h-full flex flex-col justify-between bg-white/[0.03] border border-white/10 hover:border-white/20 rounded-3xl p-4 sm:p-5 backdrop-blur-xl shadow-2xl transition-all duration-300 min-h-[300px] lg:min-h-[340px]">
               
               {/* Card Header */}
-              <div className="flex items-center justify-between mb-3.5 px-1">
+              <div className="flex items-center justify-between mb-3 px-1">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -93,15 +95,15 @@ export default function Footer() {
                   href="https://maps.app.goo.gl/9R684JqF2xZ6283R7"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1 transition-colors group px-2.5 py-1 rounded-full bg-primary/10 hover:bg-primary"
+                  className="text-xs font-semibold text-primary hover:text-white inline-flex items-center gap-1 transition-colors group px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary"
                 >
                   <span>Open Maps</span>
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
 
-              {/* Map View Frame */}
-              <div className="w-full h-[190px] sm:h-[210px] rounded-2xl overflow-hidden relative border border-white/10 bg-gray-900 shadow-inner">
+              {/* Map View Frame - Flexible & Generous Height */}
+              <div className="flex-1 w-full min-h-[200px] sm:min-h-[220px] rounded-2xl overflow-hidden relative border border-white/10 bg-gray-900 shadow-inner my-1">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6025553551537!2d86.4172458!3d23.7971556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6a2b8e55e8c15%3A0x6a2c2b3f1244f7b2!2sMatkuria%20Flyover%2C%20Dhanbad%2C%20Jharkhand%20826001!5e0!3m2!1sen!2sin!4v1709665510000!5m2!1sen!2sin" 
                   width="100%" 
@@ -115,7 +117,7 @@ export default function Footer() {
               </div>
 
               {/* Card Footer info */}
-              <div className="mt-3 flex items-center justify-between text-xs text-gray-400 px-1 pt-1">
+              <div className="mt-3 flex items-center justify-between text-xs text-gray-400 px-1">
                 <div className="flex items-center gap-1.5 truncate">
                   <MapPin className="w-3.5 h-3.5 text-primary shrink-0" />
                   <span className="truncate">Office No. 198, Ara More, Near Matkuria Flyover</span>
