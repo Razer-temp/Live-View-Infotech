@@ -281,7 +281,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="hero-section relative w-full h-[calc(100vh-72px)] lg:h-[calc(100vh-84px)] min-h-[480px] sm:min-h-[550px] flex items-center overflow-hidden bg-[#0e1015]"
+      className="hero-section relative w-full h-[75vh] sm:h-[80vh] md:h-[calc(100vh-72px)] lg:h-[calc(100vh-84px)] min-h-[480px] sm:min-h-[550px] flex items-end md:items-center overflow-hidden bg-[#0e1015]"
       aria-label="Hero banner"
     >
       {/* ── Background Images ──────────────────────────────── */}
@@ -320,6 +320,16 @@ export default function Hero() {
             transition: 'background 0.8s ease',
           }}
         />
+
+        {/* Mobile: stronger bottom gradient so text over image is readable */}
+        <div
+          className="absolute inset-0 z-10 md:hidden"
+          style={{
+            background:
+              'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.1) 70%, transparent 100%)',
+          }}
+        />
+
         {/* Bottom vignette */}
         <div
           className="absolute inset-0 z-10"
@@ -331,12 +341,12 @@ export default function Hero() {
       </div>
 
       {/* ── Foreground Content ─────────────────────────────── */}
-      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10">
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-5 sm:px-6 md:px-10 pb-14 md:pb-0">
         <div className="max-w-[650px] text-left">
           {/* Rotating eyebrow + sub-line */}
           <div
             ref={textRef}
-            className="hero-rotating-text mb-5 sm:mb-8 p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] inline-block relative overflow-hidden group"
+            className="hero-rotating-text mb-4 sm:mb-8 p-3.5 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl bg-black/20 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] inline-block relative overflow-hidden group"
             style={{ opacity: 0 }}
           >
             {/* Subtle animated gradient glow */}
@@ -348,14 +358,14 @@ export default function Hero() {
                 {displayedSlide.eyebrow}
               </span>
             </div>
-            <p className="relative z-10 text-[15px] sm:text-[18px] md:text-[22px] font-medium text-white leading-snug drop-shadow-lg hero-rotating-subline" style={{ opacity: 0, transform: 'translateY(15px)' }}>
+            <p className="relative z-10 text-[14px] sm:text-[18px] md:text-[22px] font-medium text-white leading-snug drop-shadow-lg hero-rotating-subline" style={{ opacity: 0, transform: 'translateY(15px)' }}>
               {displayedSlide.subline}
             </p>
           </div>
 
           {/* Static headline */}
           <h1
-            className="hero-static-element text-[28px] sm:text-[36px] md:text-[52px] lg:text-[58px] font-bold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6 drop-shadow-lg"
+            className="hero-static-element text-[26px] sm:text-[36px] md:text-[52px] lg:text-[58px] font-bold text-white leading-[1.1] tracking-tight mb-4 sm:mb-6 drop-shadow-lg"
             style={{ opacity: 0, transform: 'translateY(30px)' }}
           >
             Securing Today,
@@ -376,7 +386,7 @@ export default function Hero() {
       </div>
 
       {/* ── Slide Indicator Dots (clickable) ────────────────── */}
-      <div className="absolute bottom-5 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
         {heroSlides.map((_, index) => (
           <button
             key={index}
