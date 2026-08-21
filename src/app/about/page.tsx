@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   ShieldCheck,
   BadgeCheck,
@@ -274,13 +275,13 @@ export default function AboutPage() {
                 <p className="text-lg text-gray-600 mb-8 leading-relaxed">
                   Our work spans commercial buildings, institutions, industrial sites, and public infrastructure. We understand that every sector has unique compliance and operational requirements.
                 </p>
-                <a
-                  href="/industries"
+                <Link
+                  href="/services"
                   className="inline-flex items-center gap-2 text-[#095DA8] font-semibold hover:text-[#074883] transition-colors group"
                 >
                   See the full list of industries we serve
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
+                </Link>
               </div>
 
               {/* Right Side */}
@@ -303,12 +304,12 @@ export default function AboutPage() {
 
             {/* Bottom CTA */}
             <div className="text-center">
-              <a
+              <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-[#095DA8] hover:bg-[#074883] text-white rounded-full text-lg font-semibold transition-all duration-300 shadow-[0_8px_20px_rgba(9,93,168,0.25)] hover:shadow-[0_12px_25px_rgba(9,93,168,0.35)] hover:-translate-y-1"
               >
                 Get a Free Quote
-              </a>
+              </Link>
             </div>
 
           </div>

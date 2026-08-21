@@ -11,6 +11,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const solutions = [
@@ -255,13 +256,13 @@ export default function ServicesTabs() {
             </p>
 
             <div className="flex flex-wrap gap-3">
-              <button className="px-7 py-3 rounded-full bg-white text-primary font-semibold hover:bg-blue-50 transition-colors duration-300 flex items-center gap-2 text-[14px] sm:text-[15px] shadow-lg shadow-black/10">
+              <Link href="/services" className="px-7 py-3 rounded-full bg-white text-primary font-semibold hover:bg-blue-50 transition-colors duration-300 flex items-center gap-2 text-[14px] sm:text-[15px] shadow-lg shadow-black/10">
                 All Solutions
                 <ChevronRight size={16} strokeWidth={2.5} />
-              </button>
-              <button className="px-7 py-3 rounded-full border-2 border-white/40 text-white font-semibold hover:bg-white/10 hover:border-white/60 transition-all duration-300 text-[14px] sm:text-[15px]">
+              </Link>
+              <Link href="/contact" className="px-7 py-3 rounded-full border-2 border-white/40 text-white font-semibold hover:bg-white/10 hover:border-white/60 transition-all duration-300 text-[14px] sm:text-[15px]">
                 Get a Free Quote
-              </button>
+              </Link>
             </div>
           </div>
         </div>
