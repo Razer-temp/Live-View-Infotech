@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { ArrowUpRight, MapPin, Phone, ArrowRight } from "lucide-react";
 import { Anton } from "next/font/google";
 
@@ -37,7 +37,7 @@ const columnVariants = {
     transition: {
       delay: i * 0.1,
       duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94],
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   }),
 };
@@ -105,7 +105,7 @@ export default function Footer() {
           ref={ctaRef}
           initial={{ opacity: 0, y: 40 }}
           animate={isCtaInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-12 sm:mb-24 mt-4 sm:mt-10"
         >
 
@@ -403,7 +403,7 @@ export default function Footer() {
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={isWorkInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-              transition={{ delay: 0.4, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const }}
               className="flex justify-center mt-6 mb-3"
             >
               <a
