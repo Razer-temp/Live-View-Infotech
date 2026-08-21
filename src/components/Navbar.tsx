@@ -24,41 +24,49 @@ const servicesList = [
     title: 'CCTV Surveillance',
     desc: 'IP, PTZ, thermal, and ANPR camera systems for any environment',
     icon: Video,
+    href: '/services#cctv-surveillance',
   },
   {
     title: 'Access Control & Biometric',
     desc: 'Biometric readers, RFID, and complete entry management',
     icon: Fingerprint,
+    href: '/services#access-control-biometric',
   },
   {
     title: 'Entrance Security',
     desc: 'Boom barriers, turnstiles, and vehicle access systems',
     icon: ShieldCheck,
+    href: '/services#entrance-security',
   },
   {
     title: 'Fire Alarm & Fire Fighting',
     desc: 'Detection, alarm, and suppression systems',
     icon: Flame,
+    href: '/services#fire-alarm-fire-fighting',
   },
   {
     title: 'Security Screening Equipment',
     desc: 'Baggage scanners, DFMD, HHMD, and inspection systems',
     icon: Scan,
+    href: '/services#security-screening',
   },
   {
     title: 'Networking',
     desc: 'Structured cabling and network infrastructure',
     icon: Network,
+    href: '/services#networking',
   },
   {
     title: 'ELV & BMS',
     desc: 'Building management, EPABX, and AV systems',
     icon: Building2,
+    href: '/services#elv-bms',
   },
   {
     title: 'Installation & AMC',
     desc: 'Setup, commissioning, and ongoing maintenance support',
     icon: Wrench,
+    href: '/services#installation-amc',
   },
 ];
 
@@ -290,7 +298,7 @@ export default function Navbar() {
                     <div className="p-3 flex flex-col overflow-y-auto">
                     {servicesList.map((service, idx) => (
                       <Link 
-                        href="#" 
+                        href={service.href} 
                         key={idx}
                         onClick={closeMenu}
                         role="menuitem"
@@ -310,7 +318,7 @@ export default function Navbar() {
                   {/* Bottom Link */}
                   <div className="bg-[#f8f9fa] p-4 border-t border-gray-100">
                     <Link 
-                      href="/#services" 
+                      href="/services" 
                       onClick={closeMenu}
                       role="menuitem"
                       className="group flex items-center justify-center gap-2 text-[14px] font-semibold text-blue-600 hover:text-blue-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-md p-1"
@@ -471,7 +479,7 @@ export default function Navbar() {
                         <div className="pl-3 pr-1 py-2 flex flex-col gap-0.5">
                           {servicesList.map((service, idx) => (
                             <Link
-                              href="#"
+                              href={service.href}
                               key={idx}
                               onClick={closeMobileMenu}
                               className="group flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-blue-50/60 active:bg-blue-50 transition-colors"
@@ -492,7 +500,7 @@ export default function Navbar() {
                           
                           {/* View All Services */}
                           <Link
-                            href="/#services"
+                            href="/services"
                             onClick={closeMobileMenu}
                             className="flex items-center gap-2 px-3 py-2.5 mt-1 text-[13px] font-semibold text-blue-600 rounded-lg hover:bg-blue-50/60 transition-colors"
                           >

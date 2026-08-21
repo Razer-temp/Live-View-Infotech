@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
-        <main className="flex-1 relative z-10 bg-white overflow-hidden">
+        <main className="flex-1 relative z-10 bg-white overflow-x-clip">
           {children}
         </main>
         <Footer />

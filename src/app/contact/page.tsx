@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
@@ -36,11 +37,16 @@ const reasonOptions = [
 ];
 
 const serviceOptions = [
-  'CCTV Surveillance',
-  'Access Control & Biometric',
-  'Fire Alarm & Fire Fighting',
-  'Networking & ELV Systems',
-  'Not Sure / Need Consultation',
+  { label: 'CCTV Surveillance', slug: 'cctv-surveillance' },
+  { label: 'Access Control & Biometric', slug: 'access-control-biometric' },
+  { label: 'Entrance Security', slug: 'entrance-security' },
+  { label: 'Fire Alarm & Fire Fighting', slug: 'fire-alarm-fire-fighting' },
+  { label: 'Security Screening Equipment', slug: 'security-screening' },
+  { label: 'Networking & ELV Systems', slug: 'networking' },
+  { label: 'ELV & BMS', slug: 'elv-bms' },
+  { label: 'Installation & AMC', slug: 'installation-amc' },
+  { label: 'Industrial Electrical Solutions', slug: 'industrial-electrical' },
+  { label: 'Not Sure / Need Consultation', slug: 'consultation' },
 ];
 
 const sectorOptions = [
@@ -163,6 +169,14 @@ function CustomSelect({
 /* ─── Main Contact Page ────────────────────────────────────────── */
 
 export default function ContactPage() {
+  return (
+    <Suspense>
+      <ContactPageContent />
+    </Suspense>
+  );
+}
+
+function ContactPageContent() {
   // Form state
   const [reason, setReason] = useState('');
   const [services, setServices] = useState<string[]>([]);
@@ -174,6 +188,18 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  // Read ?service= param and auto-select
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam) {
+      const match = serviceOptions.find((s) => s.slug === serviceParam);
+      if (match && !services.includes(match.label)) {
+        setServices((prev) => [...prev, match.label]);
+      }
+    }
+  }, [searchParams]);
+
   // Refs for scroll animations
   const heroRef = useRef(null);
   const formRef = useRef(null);
@@ -184,9 +210,9 @@ export default function ContactPage() {
   const contactInView = useInView(contactRef, { once: true, margin: '-80px' });
 
   // Toggle service checkbox
-  const toggleService = (service: string) => {
+  const toggleService = (serviceLabel: string) => {
     setServices((prev) =>
-      prev.includes(service) ? prev.filter((s) => s !== service) : [...prev, service]
+      prev.includes(serviceLabel) ? prev.filter((s) => s !== serviceLabel) : [...prev, serviceLabel]
     );
   };
 
@@ -369,12 +395,12 @@ export default function ContactPage() {
                       </legend>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {serviceOptions.map((service) => {
-                          const isSelected = services.includes(service);
+                          const isSelected = services.includes(service.label);
                           return (
                             <motion.button
-                              key={service}
+                              key={service.slug}
                               type="button"
-                              onClick={() => toggleService(service)}
+                              onClick={() => toggleService(service.label)}
                               whileTap={{ scale: 0.97 }}
                               className={`flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 text-left text-sm font-medium transition-all duration-300
                                 ${
@@ -402,7 +428,7 @@ export default function ContactPage() {
                                   )}
                                 </AnimatePresence>
                               </div>
-                              {service}
+                              {service.label}
                             </motion.button>
                           );
                         })}
