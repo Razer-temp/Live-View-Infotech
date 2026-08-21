@@ -24,7 +24,6 @@ const servicesList = [
 const companyLinks = [
   { name: "About Us", href: "/about" },
   { name: "Industries We Serve", href: "/industries" },
-  { name: "Download Company Profile (PDF)", href: "/Live-View-Infotech-Profile.pdf" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -80,7 +79,10 @@ export default function Footer() {
                 href="mailto:liveviewinfotech@gmail.com"
                 className="group inline-flex items-center gap-3 px-5 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-gray-200 hover:text-white transition-all duration-300 text-sm sm:text-base font-medium backdrop-blur-sm"
               >
-                <span>liveviewinfotech@gmail.com</span>
+                <span className="relative">
+                  liveviewinfotech@gmail.com
+                  <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </span>
                 <span className="p-1 rounded-full bg-white/10 group-hover:bg-primary group-hover:text-white transition-colors">
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:rotate-45 transition-transform" />
                 </span>
@@ -144,7 +146,7 @@ export default function Footer() {
 
           {/* Column 1 - Company */}
           <div className="flex flex-col items-start">
-            <div className="relative w-40 h-12 mb-6">
+            <div className="relative w-56 sm:w-64 h-16 sm:h-20 mb-6">
               <Image src="/Logo.png" alt="Live View Infotech" fill className="object-contain object-left brightness-0 invert opacity-90" />
             </div>
             <p className="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed font-medium">
@@ -169,7 +171,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 sm:gap-4">
               {servicesList.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group">
+                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group inline-block w-fit">
                     <span className="inline-block group-hover:-translate-y-0.5 transition-transform">{link.name}</span>
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full"></span>
                   </Link>
@@ -184,8 +186,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 sm:gap-4">
               {companyLinks.map((link) => (
                 <li key={link.name}>
-                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group flex items-center gap-2">
-                    {link.name.includes("Download") && <FileText className="w-4 h-4" />}
+                  <Link href={link.href} className="text-gray-400 hover:text-white transition-colors duration-300 text-sm sm:text-base relative group inline-flex items-center gap-2 w-fit">
                     <span className="inline-block group-hover:-translate-y-0.5 transition-transform">{link.name}</span>
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all duration-300 group-hover:w-full"></span>
                   </Link>
@@ -217,7 +218,7 @@ export default function Footer() {
               <div className="flex items-start gap-3 mt-1 group">
                 <Phone className="w-5 h-5 text-gray-500 group-hover:text-primary transition-colors shrink-0 mt-0.5" />
                 <div>
-                  <p>+91 87890 90210 / +91 70044 84706</p>
+                  <p>+91 87890 90210</p>
                   <a href="mailto:liveviewinfotech@gmail.com" className="hover:text-white transition-colors inline-block mt-1">liveviewinfotech@gmail.com</a>
                 </div>
               </div>
