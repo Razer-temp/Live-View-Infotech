@@ -103,12 +103,12 @@ export default function Footer() {
               </div>
 
               {/* Map View Frame - Flexible & Generous Height */}
-              <div className="flex-1 w-full min-h-[200px] sm:min-h-[220px] rounded-2xl overflow-hidden relative border border-white/10 bg-gray-900 shadow-inner my-1">
+              <div className="flex-1 w-full min-h-[220px] sm:min-h-[240px] rounded-2xl overflow-hidden relative border border-white/10 bg-gray-900 shadow-inner my-1">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6025553551537!2d86.4172458!3d23.7971556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6a2b8e55e8c15%3A0x6a2c2b3f1244f7b2!2sMatkuria%20Flyover%2C%20Dhanbad%2C%20Jharkhand%20826001!5e0!3m2!1sen!2sin!4v1709665510000!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.6583839316563!2d86.40495197593665!3d23.795176278639925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6bd6e4a1b9d91%3A0x3cd4ba0af1c78a7f!2sLIVE%20VIEW%20INFOTECH!5e0!3m2!1sen!2sin!4v1787293632446!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
-                  style={{ border: 0, filter: 'grayscale(20%) contrast(1.1)' }} 
+                  style={{ border: 0 }} 
                   allowFullScreen={false} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
