@@ -30,7 +30,7 @@ const companyLinks = [
 export default function Footer() {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
   const workTogetherRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: workTogetherRef,
     offset: ["start end", "end end"]

@@ -83,24 +83,24 @@ export default function AboutPage() {
                 {/* Feature 1 */}
                 <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(9,93,168,0.15)] hover:border-[#095DA8]/20 transition-all duration-500 ease-out group relative overflow-hidden flex flex-col bg-white">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#095DA8]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   <div className="relative z-10 flex flex-col">
                     <div className="w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#095DA8] group-hover:bg-[#095DA8] group-hover:text-white mb-6 transition-all duration-500 group-hover:-translate-y-1">
                       <ShieldCheck className="w-7 h-7 transition-transform duration-500 group-hover:scale-110" />
                     </div>
-                    
+
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight group-hover:text-[#095DA8] transition-colors duration-300">
                       Professional Project Execution
                     </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-500 ease-out">
-                      Every project starts with a <span className="transition-all duration-500 ease-out px-0 group-hover:px-1.5 py-0 group-hover:py-0.5 rounded border border-transparent group-hover:border-[#095DA8]/20 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">proper site assessment</span>, not a quick quote off a phone call. We plan camera placement, access points, and fire coverage based on how your building is actually used.
+
+                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-300 ease-out">
+                      Every project starts with a <span className="box-decoration-clone transition-all duration-300 ease-out px-1.5 py-0.5 rounded border border-[#095DA8]/10 bg-[#095DA8]/5 text-gray-900 group-hover:px-2 group-hover:mx-1 group-hover:border-[#095DA8]/30 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">proper site assessment</span>, not a quick quote off a phone call. We plan camera placement, access points, and fire coverage based on how your building is actually used.
                     </p>
 
                     <div className="mt-auto">
-                      <div className="grid [grid-template-rows:0fr] group-hover:[grid-template-rows:1fr] transition-all duration-500 ease-in-out">
+                      <div className="grid [grid-template-rows:1fr] lg:[grid-template-rows:0fr] lg:group-hover:[grid-template-rows:1fr] transition-all duration-300 ease-in-out">
                         <div className="overflow-hidden">
-                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-100 transform translate-y-0 lg:opacity-0 lg:group-hover:opacity-100 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 lg:delay-100">
                             <p className="text-sm font-medium text-[#095DA8] flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#095DA8] mt-1.5 flex-shrink-0" />
                               <span>Includes detailed site mapping, risk analysis, and custom infrastructure planning.</span>
@@ -115,27 +115,27 @@ export default function AboutPage() {
                 {/* Feature 2 */}
                 <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(9,93,168,0.15)] hover:border-[#095DA8]/20 transition-all duration-500 ease-out group relative overflow-hidden flex flex-col bg-white">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#095DA8]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   <div className="relative z-10 flex flex-col">
                     <div className="w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#095DA8] group-hover:bg-[#095DA8] group-hover:text-white mb-6 transition-all duration-500 group-hover:-translate-y-1">
                       <BadgeCheck className="w-7 h-7 transition-transform duration-500 group-hover:scale-110" />
                     </div>
-                    
+
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight group-hover:text-[#095DA8] transition-colors duration-300">
                       Genuine, Certified Brands
                     </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-500 ease-out">
-                      We work with <span className="transition-all duration-500 ease-out px-0 group-hover:px-1.5 py-0 group-hover:py-0.5 rounded border border-transparent group-hover:border-[#095DA8]/20 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">established manufacturers</span> across CCTV, access control, and fire safety equipment, so what gets installed is built to last and easy to service down the line.
+
+                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-300 ease-out">
+                      We work with <span className="box-decoration-clone transition-all duration-300 ease-out px-1.5 py-0.5 rounded border border-[#095DA8]/10 bg-[#095DA8]/5 text-gray-900 group-hover:px-2 group-hover:mx-1 group-hover:border-[#095DA8]/30 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">established manufacturers</span> across CCTV, access control, and fire safety equipment, so what gets installed is built to last and easy to service down the line.
                     </p>
 
                     <div className="mt-auto">
-                      <div className="grid [grid-template-rows:0fr] group-hover:[grid-template-rows:1fr] transition-all duration-500 ease-in-out">
+                      <div className="grid [grid-template-rows:1fr] lg:[grid-template-rows:0fr] lg:group-hover:[grid-template-rows:1fr] transition-all duration-300 ease-in-out">
                         <div className="overflow-hidden">
-                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-100 transform translate-y-0 lg:opacity-0 lg:group-hover:opacity-100 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 lg:delay-100">
                             <p className="text-sm font-medium text-[#095DA8] flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#095DA8] mt-1.5 flex-shrink-0" />
-                              <span>Partnering with industry leaders for certified reliability and future-proof systems.</span>
+                              <span>Includes verified equipment sourcing, standard manufacturer warranty coverage, and spare-part availability for future servicing.</span>
                             </p>
                           </div>
                         </div>
@@ -147,27 +147,27 @@ export default function AboutPage() {
                 {/* Feature 3 */}
                 <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(9,93,168,0.15)] hover:border-[#095DA8]/20 transition-all duration-500 ease-out group relative overflow-hidden flex flex-col bg-white">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#095DA8]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   <div className="relative z-10 flex flex-col">
                     <div className="w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#095DA8] group-hover:bg-[#095DA8] group-hover:text-white mb-6 transition-all duration-500 group-hover:-translate-y-1">
                       <Wrench className="w-7 h-7 transition-transform duration-500 group-hover:scale-110" />
                     </div>
-                    
+
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight group-hover:text-[#095DA8] transition-colors duration-300">
                       Supply, Installation & Commissioning
                     </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-500 ease-out">
-                      From procurement through final testing, we <span className="transition-all duration-500 ease-out px-0 group-hover:px-1.5 py-0 group-hover:py-0.5 rounded border border-transparent group-hover:border-[#095DA8]/20 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">handle the full rollout ourselves</span> rather than passing work between subcontractors.
+
+                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-300 ease-out">
+                      From procurement through final testing, we <span className="box-decoration-clone transition-all duration-300 ease-out px-1.5 py-0.5 rounded border border-[#095DA8]/10 bg-[#095DA8]/5 text-gray-900 group-hover:px-2 group-hover:mx-1 group-hover:border-[#095DA8]/30 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">handle the full rollout ourselves</span> rather than passing work between subcontractors.
                     </p>
 
                     <div className="mt-auto">
-                      <div className="grid [grid-template-rows:0fr] group-hover:[grid-template-rows:1fr] transition-all duration-500 ease-in-out">
+                      <div className="grid [grid-template-rows:1fr] lg:[grid-template-rows:0fr] lg:group-hover:[grid-template-rows:1fr] transition-all duration-300 ease-in-out">
                         <div className="overflow-hidden">
-                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-100 transform translate-y-0 lg:opacity-0 lg:group-hover:opacity-100 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 lg:delay-100">
                             <p className="text-sm font-medium text-[#095DA8] flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#095DA8] mt-1.5 flex-shrink-0" />
-                              <span>100% in-house expertise ensuring strict quality control from start to finish.</span>
+                              <span>Includes equipment procurement, on-site installation, complete system testing, and final commissioning sign-off before handover.</span>
                             </p>
                           </div>
                         </div>
@@ -179,27 +179,27 @@ export default function AboutPage() {
                 {/* Feature 4 */}
                 <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(9,93,168,0.15)] hover:border-[#095DA8]/20 transition-all duration-500 ease-out group relative overflow-hidden flex flex-col bg-white">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#095DA8]/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
+
                   <div className="relative z-10 flex flex-col">
                     <div className="w-14 h-14 rounded-xl bg-white shadow-sm flex items-center justify-center text-[#095DA8] group-hover:bg-[#095DA8] group-hover:text-white mb-6 transition-all duration-500 group-hover:-translate-y-1">
                       <PhoneCall className="w-7 h-7 transition-transform duration-500 group-hover:scale-110" />
                     </div>
-                    
+
                     <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight group-hover:text-[#095DA8] transition-colors duration-300">
                       Technical Support & AMC
                     </h3>
-                    
-                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-500 ease-out">
-                      Installation is the start, not the finish. We offer ongoing maintenance and <span className="transition-all duration-500 ease-out px-0 group-hover:px-1.5 py-0 group-hover:py-0.5 rounded border border-transparent group-hover:border-[#095DA8]/20 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">annual support contracts</span> so systems keep working long after handover.
+
+                    <p className="text-gray-600 leading-relaxed relative z-10 transition-all duration-300 ease-out">
+                      Installation is the start, not the finish. We offer ongoing maintenance and <span className="box-decoration-clone transition-all duration-300 ease-out px-1.5 py-0.5 rounded border border-[#095DA8]/10 bg-[#095DA8]/5 text-gray-900 group-hover:px-2 group-hover:mx-1 group-hover:border-[#095DA8]/30 group-hover:bg-[#095DA8]/10 group-hover:text-[#095DA8] font-medium">annual support contracts</span> so systems keep working long after handover.
                     </p>
 
                     <div className="mt-auto">
-                      <div className="grid [grid-template-rows:0fr] group-hover:[grid-template-rows:1fr] transition-all duration-500 ease-in-out">
+                      <div className="grid [grid-template-rows:1fr] lg:[grid-template-rows:0fr] lg:group-hover:[grid-template-rows:1fr] transition-all duration-300 ease-in-out">
                         <div className="overflow-hidden">
-                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                          <div className="pt-6 mt-4 border-t border-gray-200/60 opacity-100 transform translate-y-0 lg:opacity-0 lg:group-hover:opacity-100 lg:translate-y-4 lg:group-hover:translate-y-0 transition-all duration-300 lg:delay-100">
                             <p className="text-sm font-medium text-[#095DA8] flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#095DA8] mt-1.5 flex-shrink-0" />
-                              <span>Dedicated technical support with fast, SLA-backed maintenance response times.</span>
+                              <span>Includes scheduled maintenance visits, remote troubleshooting, and priority response for system faults.</span>
                             </p>
                           </div>
                         </div>
