@@ -45,25 +45,9 @@
     /* Tailwind gray-400 on hover */
   }
 
-  /* Universal Smooth Scroll & Hardware Acceleration */
-  html {
+  /* Ensure native smooth-scroll doesn't clash with Lenis when active on desktop */
+  html.lenis {
     scroll-behavior: auto !important;
-  }
-
-  /* GPU-accelerated compositing to eliminate scroll jank */
-  main {
-    transform: translateZ(0);
-  }
-
-  /* Offload off-screen section painting to boost low-end device framerates */
-  @supports (content-visibility: auto) {
-    #industries,
-    #services,
-    #about,
-    footer {
-      content-visibility: auto;
-      contain-intrinsic-size: 1px 700px;
-    }
   }
 }
 
