@@ -20,6 +20,7 @@ export const viewport: Viewport = {
 };
 
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function RootLayout({
   children,
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
+        <SmoothScroll />
         <main className="flex-1 relative z-10 bg-white overflow-x-clip">
           {children}
         </main>
