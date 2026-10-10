@@ -13,26 +13,32 @@ const heroSlides = [
     alt: 'Railway platform with CCTV camera on support beam — critical infrastructure surveillance',
     eyebrow: 'Critical Infrastructure',
     subline: 'Eyes on every platform, every hour.',
-    // Camera is right-of-center; on mobile crop toward the right
-    mobileObjectPosition: '70% center',
-    needsStrongGradient: true, // more centered framing
+    // Camera is mounted high on the right column truss
+    desktopObjectPosition: '80% 20%',
+    mobileObjectPosition: '75% 25%',
+    transformOrigin: '80% 25%',
+    needsStrongGradient: false,
   },
   {
     src: '/hero-img/hero-img2.png',
     alt: 'Office entrance with CCTV dome camera and biometric access reader',
     eyebrow: 'Smart Access Control',
     subline: 'Every entry, verified.',
-    // Camera & reader are right-of-center; on mobile keep right side
-    mobileObjectPosition: '65% center',
-    needsStrongGradient: true, // more centered framing
+    // Dome camera is under top canopy; biometric reader on right doorway
+    desktopObjectPosition: '75% 25%',
+    mobileObjectPosition: '70% 30%',
+    transformOrigin: '75% 30%',
+    needsStrongGradient: true,
   },
   {
     src: '/hero-img/hero-img3.png',
     alt: 'High mast lighting pole with DG set and electrical panel at industrial site',
     eyebrow: 'Power & Infrastructure',
     subline: 'Reliable power, engineered to last.',
-    // Pole centered, DG/panel on right; open left sky
-    mobileObjectPosition: '55% center',
+    // High mast floodlight ring is at the very top (3%-15% Y); DG set & panel at bottom
+    desktopObjectPosition: '60% 4%',
+    mobileObjectPosition: '58% 8%',
+    transformOrigin: '60% 10%',
     needsStrongGradient: false,
   },
   {
@@ -40,8 +46,10 @@ const heroSlides = [
     alt: 'Boom barrier with surveillance camera at controlled access gate',
     eyebrow: 'Controlled Access',
     subline: 'Know who enters, every time.',
-    // Barrier is centered; hedge/sky on the left is open space
-    mobileObjectPosition: '45% center',
+    // Barrier is centered, surveillance pole on left-center
+    desktopObjectPosition: '50% 40%',
+    mobileObjectPosition: '48% 40%',
+    transformOrigin: '50% 40%',
     needsStrongGradient: false,
   },
   {
@@ -49,8 +57,10 @@ const heroSlides = [
     alt: 'Fire suppression piping, panel and extinguisher in commercial facility',
     eyebrow: 'Fire Safety',
     subline: 'Early warning. Real protection.',
-    // Fire equipment on the right wall; open space on left
-    mobileObjectPosition: '60% center',
+    // Fire piping spans ceiling (top); fire cabinet & panel on right
+    desktopObjectPosition: '68% 22%',
+    mobileObjectPosition: '65% 25%',
+    transformOrigin: '70% 25%',
     needsStrongGradient: false,
   },
   {
@@ -58,8 +68,10 @@ const heroSlides = [
     alt: 'Solar-powered street light at industrial area',
     eyebrow: 'Sustainable Infrastructure',
     subline: 'Power where the grid doesn\u2019t reach.',
-    // Solar pole is right-of-center
-    mobileObjectPosition: '60% center',
+    // Solar panel array and luminaire head are at top-right (5%-35% Y)
+    desktopObjectPosition: '78% 10%',
+    mobileObjectPosition: '72% 12%',
+    transformOrigin: '78% 15%',
     needsStrongGradient: false,
   },
 ];
@@ -142,7 +154,7 @@ export default function Hero() {
           gsap.fromTo(
             firstImage.querySelector('img'),
             { scale: 1 },
-            { scale: 1.08, duration: SLIDE_DURATION / 1000, ease: 'none' }
+            { scale: 1.04, duration: SLIDE_DURATION / 1000, ease: 'none' }
           );
         }
       }
@@ -236,7 +248,7 @@ export default function Hero() {
           nextImageEl.querySelector('img'),
           { scale: 1 },
           {
-            scale: 1.08,
+            scale: 1.04,
             duration: SLIDE_DURATION / 1000,
             ease: 'none',
           },
@@ -281,7 +293,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="hero-section relative w-full h-[75vh] sm:h-[80vh] md:h-[calc(100vh-72px)] lg:h-[calc(100vh-84px)] min-h-[480px] sm:min-h-[550px] flex items-end md:items-center overflow-hidden bg-[#0e1015]"
+      className="hero-section relative w-full h-[78vh] sm:h-[82vh] md:h-[calc(100vh-72px)] lg:h-[calc(100vh-84px)] min-h-[520px] sm:min-h-[580px] md:min-h-[620px] lg:min-h-[660px] xl:min-h-[700px] max-h-[960px] flex items-end md:items-center overflow-hidden bg-[#0e1015]"
       aria-label="Hero banner"
     >
       {/* ── Background Images ──────────────────────────────── */}
@@ -293,7 +305,14 @@ export default function Hero() {
               imageRefs.current[index] = el;
             }}
             className="absolute inset-0 hero-slide-image"
-            style={{ opacity: index === 0 ? 1 : 0 }}
+            style={
+              {
+                opacity: index === 0 ? 1 : 0,
+                '--obj-pos-mobile': slide.mobileObjectPosition,
+                '--obj-pos-desktop': slide.desktopObjectPosition,
+                '--zoom-origin': slide.transformOrigin,
+              } as React.CSSProperties
+            }
           >
             <Image
               src={slide.src}
@@ -302,9 +321,13 @@ export default function Hero() {
               priority={index === 0}
               className="hero-carousel-img object-cover"
               sizes="100vw"
-              style={{
-                objectPosition: slide.mobileObjectPosition,
-              }}
+              style={
+                {
+                  '--obj-pos-mobile': slide.mobileObjectPosition,
+                  '--obj-pos-desktop': slide.desktopObjectPosition,
+                  '--zoom-origin': slide.transformOrigin,
+                } as React.CSSProperties
+              }
             />
           </div>
         ))}

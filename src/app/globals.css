@@ -73,19 +73,21 @@
  * Evens out warm (img2, img6) vs cool (img1, img4, img5) colour temps
  * so the carousel doesn't visually "jump" in mood as it rotates.
  */
+/*
+ * Responsive image positioning and transform origin:
+ * Uses custom CSS variables passed per-slide from Hero.tsx
+ * so each product (high mast lights, solar panel, CCTV cameras)
+ * is perfectly framed without being cut off on 13"-16" laptops or mobile.
+ */
 .hero-carousel-img {
   filter: contrast(1.03) saturate(0.95);
+  object-position: var(--obj-pos-mobile, center center);
+  transform-origin: var(--zoom-origin, center center);
 }
 
-/*
- * On mobile (portrait), override the inline object-position
- * to use a taller crop that keeps the main subject visible.
- * Each slide has a custom mobileObjectPosition in the data,
- * but on wide screens we want natural center framing.
- */
 @media (min-width: 768px) {
   .hero-carousel-img {
-    object-position: center center !important;
+    object-position: var(--obj-pos-desktop, center center);
   }
 }
 
